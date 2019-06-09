@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     Toast.makeText(getApplicationContext(), "Username and Password do not match!", Toast.LENGTH_LONG).show();
                 }
+
+                etUsername.setText("");
+                etPassword.setText("");
+
                 break;
             case R.id.tvRegisterLink:
                 startActivity(new Intent(this, Register.class));

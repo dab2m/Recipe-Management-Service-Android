@@ -39,15 +39,21 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_LONG).show();
                 } else {
-                    //unique username olup olmadigini kontrol et
                     User user = new User(username, password);
                     DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-                    db.insertData(user);
-                    etUsername.setText("");
-                    etPassword.setText("");
 
-                    Toast.makeText(getApplicationContext(), "Register is succesful", Toast.LENGTH_LONG).show();
+                    if (db.searchPass(username) == null) {
+                        db.insertData(user);
 
+                        etUsername.setText("");
+                        etPassword.setText("");
+
+                        Toast.makeText(getApplicationContext(), "Register is successful", Toast.LENGTH_LONG).show();
+                    } else {
+                        etPassword.setText("");
+
+                        Toast.makeText(getApplicationContext(), "Username must be unique!", Toast.LENGTH_LONG).show();
+                    }
                 }
 
                 break;
