@@ -4,13 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Homepage">
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/homePage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:layout_gravity="center_horizontal"
+        android:textSize="40sp"
+        android:text="Anasayfa"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:padding="8dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="WELCOME HOMEPAGE"
-        android:textSize="36sp" />
+        android:text="Yemek Tarifleri"
+        android:background="@color/colorGrey"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+
 </LinearLayout>
