@@ -11,15 +11,14 @@
     android:id="@+id/loginPage"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textColor="@color/colorAccent"
     android:layout_gravity="center_horizontal"
     android:textSize="40sp"
-    android:text="Giriş Sayfası"
+    android:text="Yemek Tarifi Giriş"
     android:textStyle="bold" />
 
 
     <TextView
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:text="Username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -46,8 +45,8 @@
         android:id="@+id/bLogin"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
+        android:background="@color/colorPrimary"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
         android:text="Login" />
 
     <TextView
@@ -57,6 +56,6 @@
         android:layout_gravity="center_horizontal"
         android:text="Register Here"
         android:textStyle="bold"
-        android:background="@color/colorPrimaryDark"/>
+        />
 
 </LinearLayout>
