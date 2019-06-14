@@ -5,14 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
-public class Homepage extends AppCompatActivity implements View.OnClickListener {
-
-    Button bYeniYemekTarifi;
-
+public class Homepage extends AppCompatActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
 
     TextView homePage;
+    Button bYeniYemekTarifi;
+    SearchView yemekArama;
+    ListView yemekListesi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +37,15 @@ public class Homepage extends AppCompatActivity implements View.OnClickListener 
                 startActivity(new Intent(this, RecipeAdding.class));
                 break;
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        return false;
     }
 }

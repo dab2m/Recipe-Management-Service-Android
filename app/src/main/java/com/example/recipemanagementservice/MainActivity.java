@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button bLogin;
     EditText etUsername;
     EditText etPassword;
-    TextView loginPage;
     TextView tvRegisterLink;
 
 
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
-        loginPage = (TextView) findViewById(R.id.loginPage);
         tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
 
         bLogin.setOnClickListener(this);
