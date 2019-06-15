@@ -1,9 +1,6 @@
 package com.example.recipemanagementservice;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -12,16 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.InputStream;
 
 public class RecipeAdding extends AppCompatActivity implements View.OnClickListener {
 
     EditText etYemekIsmi;
+    ImageView imgYemekResmi;
     EditText etYemekAciklamasi;
     EditText etYemekEtiketleri;
-    ImageView imgYemekResmi;
 
     Button btnKaydet;
     Button btnIptalet;
@@ -38,6 +34,8 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
         etYemekAciklamasi = (EditText) findViewById(R.id.etyemekAciklamasi);
         etYemekEtiketleri = (EditText) findViewById(R.id.etyemekEtiketleri);
         imgYemekResmi = (ImageView) findViewById(R.id.imgYemekResmi);
+        imgYemekResmi.setImageResource(R.drawable.no);
+
 
 
         btnKaydet = (Button) findViewById(R.id.btnKaydet);
@@ -50,13 +48,12 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
         btnResimEkle.setOnClickListener(this);
 
 
-
     }
 
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnResimEkle:
                 Intent galeri_int = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
 
@@ -64,21 +61,39 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btnKaydet:
+                String foodName = etYemekIsmi.getText().toString();
+                String foodDescription = etYemekAciklamasi.getText().toString();
+                String foodTags = etYemekEtiketleri.getText().toString();
+
+                if (foodName.isEmpty() || foodDescription.isEmpty() || foodTags.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_LONG).show();
+                } else {
+                    Food food = new Food(foodName, null, foodDescription, foodTags);
+                    DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+                    db.insertFoodData(food);
+                    Toast.makeText(getApplicationContext(), "Adding is successful", Toast.LENGTH_LONG).show();
+
+                    etYemekIsmi.setText("");
+                    imgYemekResmi.setImageResource(R.drawable.no);
+                    etYemekAciklamasi.setText("");
+                    etYemekEtiketleri.setText("");
+                }
+
                 break;
             case R.id.btnIptalEt:
-                etYemekEtiketleri.setText("");
-                etYemekAciklamasi.setText("");
                 etYemekIsmi.setText("");
-               imgYemekResmi.setImageDrawable(Drawable.createFromPath(""));
+                imgYemekResmi.setImageResource(R.drawable.no);
+                etYemekAciklamasi.setText("");
+                etYemekEtiketleri.setText("");
                 break;
         }
 
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == RESULT_OK && requestCode == 100){
+        if (resultCode == RESULT_OK && requestCode == 100) {
             imageUri = data.getData();
             imgYemekResmi.setImageURI(imageUri);
         }

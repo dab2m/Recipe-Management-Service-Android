@@ -43,7 +43,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     DatabaseHelper db = new DatabaseHelper(getApplicationContext());
 
                     if (db.searchPass(username) == null) {
-                        db.insertData(user);
+                        db.insertUserData(user);
 
                         etUsername.setText("");
                         etPassword.setText("");
