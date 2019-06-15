@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 import java.io.InputStream;
 
+/**
+ * Created by Berk on 10.06.2019.
+ */
 public class RecipeAdding extends AppCompatActivity implements View.OnClickListener {
 
     EditText etYemekIsmi;
@@ -64,6 +67,7 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btnKaydet:
+                System.out.println(etYemekAciklamasi.getText());
                 break;
             case R.id.btnIptalEt:
                 etYemekEtiketleri.setText("");

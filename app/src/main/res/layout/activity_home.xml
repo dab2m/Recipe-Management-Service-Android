@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/homePage"
@@ -13,15 +14,11 @@
         android:layout_gravity="center_horizontal"
         android:textSize="40sp"
         android:text="Anasayfa"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </LinearLayout>
-
     <Button
+        android:layout_marginTop="8dp"
         android:id="@+id/bYeniYemekTarifi"
         android:layout_width="385dp"
         android:layout_height="wrap_content"
@@ -31,26 +28,28 @@
 
     <SearchView
         android:id="@+id/yemekArama"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_marginTop="16dp"
+        android:layout_width="385dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
     </SearchView>
+
     <ListView
         android:id="@+id/yemekListesi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </ListView>
 
     <TextView
         android:id="@+id/YemekTarifleri"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
         android:text="Yemek Tarifleri"
         android:textSize="24sp"
         android:textStyle="bold"/>
-
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -73,12 +72,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Yemek Ismi"
+                    android:text="@string/food_name"
                     android:textSize="18dp"
                     android:textStyle="bold"/>
 
                 <ImageView
                     android:id="@+id/yemekResmi"
+                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="left"
@@ -86,28 +86,22 @@
 
                 <TextView
                     android:id="@+id/yemekAciklamasi"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:textSize="16dp"
-                    android:text="Yemek Açıklaması"/>
+                    android:text="@string/food_description"/>
 
                 <TextView
                     android:id="@+id/yemekEtiketleri"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:textSize="16dp"
-                    android:text="Yemek Etiketleri"/>
-
-
-
-
+                    android:text="@string/food_tags"/>
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
-
-
 </LinearLayout>

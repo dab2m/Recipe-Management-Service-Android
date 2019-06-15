@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="1dp"
     android:orientation="horizontal"
-    card_view:cardCornerRadius="10dp"
-
-    card_view:cardElevation="5dp">
-
+    android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="410dp"
@@ -22,62 +17,72 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Yeni Tarif Ekle"
+            android:textColor="@color/colorWhite"
             android:textSize="36sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etyemekIsmi"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="Yemek Ismi" />
-
+            android:hint="@string/food_name"/>
 
         <ImageView
             android:id="@+id/imgYemekResmi"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:scaleType="fitCenter" />
-
+            android:scaleType="fitCenter"
+            android:src="@drawable/no"/>
 
         <Button
             android:id="@+id/btnResimEkle"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:background="@color/amber"
             android:text="Resim Ekle" />
 
         <EditText
             android:id="@+id/etyemekAciklamasi"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="Yemek Açıklaması" />
+            android:paddingTop="16dp"
+            android:hint="@string/food_description" />
 
         <EditText
             android:id="@+id/etyemekEtiketleri"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="Yemek Etiketleri" />
+            android:paddingTop="16dp"
+            android:hint="@string/food_tags" />
 
-
-        <Button
-            android:id="@+id/btnKaydet"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:text="Kaydet" />
+            android:orientation="horizontal"
+            android:weightSum="100"
+            android:paddingTop="16dp">
 
-        <Button
-            android:id="@+id/btnIptalEt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:text="Iptal Et" />
+            <Button
+                android:id="@+id/btnKaydet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:background="@color/colorPrimary"
+                android:text="Kaydet" />
 
+            <Button
+                android:id="@+id/btnIptalEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:background="@color/red"
+                android:text="Iptal Et" />
+        </LinearLayout>
     </LinearLayout>
-
-</android.support.v7.widget.CardView>
+</LinearLayout>
 

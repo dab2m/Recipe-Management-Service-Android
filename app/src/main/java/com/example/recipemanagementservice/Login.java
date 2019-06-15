@@ -12,28 +12,28 @@ import android.widget.Toast;
 /**
  * Created by mustafatozluoglu on 5.06.2019
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener {
 
     DatabaseHelper helper = new DatabaseHelper(this);
 
     Button bLogin;
+    Button bRegister;
     EditText etUsername;
     EditText etPassword;
-    TextView tvRegisterLink;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
-        tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
+        bRegister = (Button) findViewById(R.id.bRegister);
 
         bLogin.setOnClickListener(this);
-        tvRegisterLink.setOnClickListener(this);
+        bRegister.setOnClickListener(this);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String password = helper.searchPass(user);
 
                 if (pass.equals(password)) {
-                    startActivity(new Intent(this, Homepage.class));
+                    startActivity(new Intent(this, Home.class));
                 } else {
                     Toast.makeText(getApplicationContext(), "Username and Password do not match!", Toast.LENGTH_LONG).show();
                 }
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 etPassword.setText("");
 
                 break;
-            case R.id.tvRegisterLink:
+            case R.id.bRegister:
                 startActivity(new Intent(this, Register.class));
                 break;
         }

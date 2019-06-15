@@ -9,7 +9,10 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-public class Homepage extends AppCompatActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
+/**
+ * Created by mustafatozluoglu on 10.06.2019
+ */
+public class Home extends AppCompatActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
 
     TextView homePage;
     Button bYeniYemekTarifi;
@@ -19,7 +22,7 @@ public class Homepage extends AppCompatActivity implements View.OnClickListener,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
+        setContentView(R.layout.activity_home);
 
         homePage = (TextView) findViewById(R.id.homePage);
 

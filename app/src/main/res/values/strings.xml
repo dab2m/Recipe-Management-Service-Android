@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Recipe Management Service</string>
+    <string name="user_name">Username</string>
+    <string name="password">Password</string>
+    <string name="food_name">Yemek İsmi</string>
+    <string name="food_description">Yemek Açıklaması</string>
+    <string name="food_tags">Yemek Etiketleri</string>
 </resources>
