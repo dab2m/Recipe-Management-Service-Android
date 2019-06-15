@@ -1,6 +1,8 @@
 package com.example.recipemanagementservice;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 
 public class RecipeAdding extends AppCompatActivity implements View.OnClickListener {
@@ -37,7 +41,6 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
         imgYemekResmi.setImageResource(R.drawable.no);
 
 
-
         btnKaydet = (Button) findViewById(R.id.btnKaydet);
         btnIptalet = (Button) findViewById(R.id.btnIptalEt);
         btnResimEkle = (Button) findViewById(R.id.btnResimEkle);
@@ -55,20 +58,21 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
 
         switch (view.getId()) {
             case R.id.btnResimEkle:
-                Intent galeri_int = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
 
-                startActivityForResult(galeri_int, 100);
+                startActivityForResult(intent, 100);
 
                 break;
             case R.id.btnKaydet:
                 String foodName = etYemekIsmi.getText().toString();
                 String foodDescription = etYemekAciklamasi.getText().toString();
                 String foodTags = etYemekEtiketleri.getText().toString();
+                byte[] foodImage = imageViewToByte(imgYemekResmi);
 
                 if (foodName.isEmpty() || foodDescription.isEmpty() || foodTags.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_LONG).show();
                 } else {
-                    Food food = new Food(foodName, null, foodDescription, foodTags);
+                    Food food = new Food(foodName, foodImage, foodDescription, foodTags);
                     DatabaseHelper db = new DatabaseHelper(getApplicationContext());
                     db.insertFoodData(food);
                     Toast.makeText(getApplicationContext(), "Adding is successful", Toast.LENGTH_LONG).show();
@@ -88,6 +92,14 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
+    }
+
+    public static byte[] imageViewToByte(ImageView image) {
+        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
