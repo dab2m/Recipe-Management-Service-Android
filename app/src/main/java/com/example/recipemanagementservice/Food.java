@@ -1,15 +1,21 @@
 package com.example.recipemanagementservice;
 
+import java.util.ArrayList;
+
 /**
  * Created by mustafatozluoglu on 14.06.2019
  */
 public class Food {
     private String foodName;
-    private byte[] foodImage;
+    private int foodImage;
     private String foodDescription;
     private String foodTag;
 
-    public Food(String foodName, byte[] foodImage, String foodDescription, String foodTag) {
+    public Food(){
+
+    }
+
+    public Food(String foodName, int foodImage, String foodDescription, String foodTag) {
         this.foodName = foodName;
         this.foodImage = foodImage;
         this.foodDescription = foodDescription;
@@ -24,11 +30,11 @@ public class Food {
         this.foodName = foodName;
     }
 
-    public byte[] getFoodImage() {
+    public int getFoodImage() {
         return foodImage;
     }
 
-    public void setFoodImage(byte[] foodImage) {
+    public void setFoodImage(int foodImage) {
         this.foodImage = foodImage;
     }
 
@@ -46,5 +52,22 @@ public class Food {
 
     public void setFoodTag(String foodTag) {
         this.foodTag = foodTag;
+    }
+
+    public static ArrayList<Food> getData() {
+        ArrayList<Food> foodList = new ArrayList<Food>();
+        int foodImages[] = {R.drawable.no, R.drawable.no, R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no};
+        String[] foodNames = {"Geleceği Yazanlar", "Paycell", "Tv+","Dergilik","Bip","GNC","Hesabım","Sim","LifeBox","Merhaba Umut","Yaani","Hayal Ortağım","Goller Cepte","Piri"};
+
+        for (int i = 0; i < foodImages.length; i++) {
+            Food temp = new Food();
+            temp.setFoodImage(foodImages[i]);
+            temp.setFoodName(foodNames[i]);
+            temp.setFoodDescription("Turkcell");
+            temp.setFoodTag("asd");
+
+            foodList.add(temp);
+        }
+        return foodList;
     }
 }

@@ -7,24 +7,40 @@
     android:orientation="vertical"
     android:background="@drawable/background">
 
-    <TextView
-        android:id="@+id/homePage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textSize="40sp"
-        android:text="Anasayfa"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold" />
-
-    <Button
+    <LinearLayout
         android:layout_marginTop="8dp"
-        android:id="@+id/bYeniYemekTarifi"
-        android:layout_width="385dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:background="@color/colorPrimary"
-        android:text="Yeni Yemek Tarifi" />
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_home_gray_24dp"
+            android:layout_weight="20"/>
+
+        <TextView
+            android:id="@+id/homePage"
+            android:layout_weight="80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="40sp"
+            android:text="Anasayfa"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/bYeniYemekTarifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorPrimary"
+            android:text="  Yeni Yemek Tarifi   " />
+    </LinearLayout>
 
     <SearchView
         android:id="@+id/yemekArama"
@@ -45,63 +61,17 @@
         android:id="@+id/YemekTarifleri"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
         android:text="Yemek Tarifleri"
-        android:textSize="24sp"
+        android:textColor="@color/amber"
+        android:textSize="30sp"
         android:textStyle="bold"/>
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recylerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/yemekIsmi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/food_name"
-                    android:textSize="18dp"
-                    android:textStyle="bold"/>
-
-                <ImageView
-                    android:id="@+id/yemekResmi"
-                    android:layout_marginTop="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:src="@mipmap/ic_launcher" />
-
-                <TextView
-                    android:id="@+id/yemekAciklamasi"
-                    android:layout_marginTop="8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="16dp"
-                    android:text="@string/food_description"/>
-
-                <TextView
-                    android:id="@+id/yemekEtiketleri"
-                    android:layout_marginTop="8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="16dp"
-                    android:text="@string/food_tags"/>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

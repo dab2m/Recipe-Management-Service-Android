@@ -56,7 +56,7 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
                 String foodName = etYemekIsmi.getText().toString();
                 String foodDescription = etYemekAciklamasi.getText().toString();
                 String foodTags = etYemekEtiketleri.getText().toString();
-                byte[] foodImage = imageViewToByte(imgYemekResmi);
+                int foodImage = imageViewToInt(imgYemekResmi);
                 if (foodName.isEmpty() || foodDescription.isEmpty() || foodTags.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_LONG).show();
                 } else {
@@ -79,12 +79,12 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public static byte[] imageViewToByte(ImageView image) {
+    public static int imageViewToInt(ImageView image) {
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
-        return byteArray;
+        return byteArray[0];
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
