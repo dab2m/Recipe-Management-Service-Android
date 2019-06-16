@@ -56,15 +56,15 @@ public class Food {
 
     public static ArrayList<Food> getData() {
         ArrayList<Food> foodList = new ArrayList<Food>();
-        int foodImages[] = {R.drawable.no, R.drawable.no, R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no,R.drawable.no};
-        String[] foodNames = {"Geleceği Yazanlar", "Paycell", "Tv+","Dergilik","Bip","GNC","Hesabım","Sim","LifeBox","Merhaba Umut","Yaani","Hayal Ortağım","Goller Cepte","Piri"};
+        int foodImages[] = {R.drawable.frambuazli_pasta, R.drawable.fondu, R.drawable.nohutlu_pilav};
+        String[] foodNames = {"Ozel Kremalı Frambuazlı Yaş Pasta", "Fondü", "Nohutlu Pilav"};
 
         for (int i = 0; i < foodImages.length; i++) {
             Food temp = new Food();
             temp.setFoodImage(foodImages[i]);
             temp.setFoodName(foodNames[i]);
-            temp.setFoodDescription("Turkcell");
-            temp.setFoodTag("asd");
+            temp.setFoodDescription("description");
+            temp.setFoodTag("recipe");
             foodList.add(temp);
         }
         return foodList;
