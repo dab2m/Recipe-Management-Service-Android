@@ -65,7 +65,6 @@ public class Food {
             temp.setFoodName(foodNames[i]);
             temp.setFoodDescription("Turkcell");
             temp.setFoodTag("asd");
-
             foodList.add(temp);
         }
         return foodList;
