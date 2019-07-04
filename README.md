@@ -1,10 +1,10 @@
 # Recipe-Management-Service-ANDROID
 
-![Picture](andriod.png)
+![img](andriod.png)
 
 [Website](https://recipemanagementservice495.herokuapp.com/login.php) 💻
 
-# What is Recipe Management Service? 🤔
+# What is Recipe Management Service ? 🤔
 
   Recipe Management Service is an app works on both web and android 😮.  You can add your favorite recipes to your profile to never forget them❗️  
   You can also share your recipes with your friends they can like your recipes if they are impressed by your cooking skills❗️ 😉
@@ -28,4 +28,4 @@
  💥 [Mustafa Said Tozluoglu](https://github.com/mustafatozluoglu)
  💥 [Ali Berk Sığın](https://github.com/berksigin)
 
- [Check out our android app](https://github.com/dab2m/Recipe-Management-Service-Web) 😀
+ [Check out our web app](https://github.com/dab2m/Recipe-Management-Service-Web) 😀
