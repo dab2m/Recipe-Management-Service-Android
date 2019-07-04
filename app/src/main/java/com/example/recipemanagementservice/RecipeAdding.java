@@ -7,9 +7,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -98,23 +95,5 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.layout_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.goHomepage:
-                startActivity(new Intent(this, Home.class));
-                break;
-            case R.id.goRecipeAdding:
-                startActivity(new Intent(this, RecipeAdding.class));
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
