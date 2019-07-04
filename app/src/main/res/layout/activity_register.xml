@@ -47,6 +47,6 @@
         android:id="@+id/bRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/rounded_button"
         android:text="Register" />
 </LinearLayout>
