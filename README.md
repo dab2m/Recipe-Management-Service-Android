@@ -1,7 +1,6 @@
 # Recipe-Management-Service-ANDROID
 
 <img src="android.png" width=150>
-[Website](https://recipemanagementservice495.herokuapp.com/login.php) 💻
 
 # What is Recipe Management Service ? 🤔
 
