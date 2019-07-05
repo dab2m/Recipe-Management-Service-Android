@@ -1,6 +1,6 @@
 # Recipe-Management-Service-ANDROID
 
-<img src="android.png" widht=150/>
+![android](android.png =150x)
 [Website](https://recipemanagementservice495.herokuapp.com/login.php) 💻
 
 
