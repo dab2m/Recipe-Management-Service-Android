@@ -13,7 +13,7 @@
   
   It is quite easy 👍 Just follow these steps to make your friends jealous  
   👉 Just click on link and register yourself.  
-  👉 Add your best ⭐️ recipe from "Yeni yemek tarifi" button at right side of the page  
+  👉 Add your best ⭐️ recipe from "Yeni yemek tarifi" button at top of the page  
   👉 Choose a photo that shows your dish perfectly 🌟 and Add simple instructions if some of your friends think they are as capable as you are 😈  
   👉 Choose tags that describes your recipe. Don't forget ❗️ If you want to search for your bestest of best recipe later  
   you are going to use search at the top of the page ☝️ to type in tags or name of your recipe  
