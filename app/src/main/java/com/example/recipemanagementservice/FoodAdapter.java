@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,31 +19,41 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
 
     ArrayList<Food> mFoodList;
     LayoutInflater inflater;
+    int withDelete; // 1:without delete    2:with delete
 
-    public FoodAdapter(Context context, ArrayList<Food> foods) {
+    public FoodAdapter(Context context, ArrayList<Food> foods, int withDelete) {
         inflater = LayoutInflater.from(context);
         this.mFoodList = foods;
+        this.withDelete = withDelete;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = inflater.inflate(R.layout.item_recipe, viewGroup, false);
-        MyViewHolder holder = new MyViewHolder(view);
-        return holder;
+        if (withDelete == 1) {
+            View view = inflater.inflate(R.layout.item_recipe_without_delete, viewGroup, false);
+            MyViewHolder holder = new MyViewHolder(view);
+            return holder;
+        } else {
+            View view = inflater.inflate(R.layout.item_recipe_with_delete, viewGroup, false);
+            MyViewHolder holder = new MyViewHolder(view);
+            return holder;
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         Food selectFood = mFoodList.get(position);
         holder.setData(selectFood, position);
-        holder.bDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mFoodList.remove(position);
-                notifyDataSetChanged();
-            }
-        });
+        if (withDelete == 2) {
+            holder.bDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mFoodList.remove(position);
+                    notifyDataSetChanged();
+                }
+            });
+        }
     }
 
     @Override

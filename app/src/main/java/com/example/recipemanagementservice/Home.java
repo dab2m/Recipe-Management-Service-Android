@@ -37,8 +37,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recylerview);
-        FoodAdapter foodAdapter = new FoodAdapter(this, Food.getData());
+        FoodAdapter foodAdapter = new FoodAdapter(this, Food.getData(), 1);
         recyclerView.setAdapter(foodAdapter);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);

@@ -11,7 +11,7 @@ public class Food {
     private String foodDescription;
     private String foodTag;
 
-    public Food(){
+    public Food() {
 
     }
 

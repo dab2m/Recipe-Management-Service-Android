@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,6 @@
     </LinearLayout>
 
 
-
     <TextView
         android:id="@+id/Tariflerim"
         android:layout_width="match_parent"
@@ -26,11 +25,10 @@
         android:text="Tariflerim"
         android:textColor="@color/amber"
         android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recylerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 </LinearLayout>
