@@ -35,13 +35,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         Food selectFood = mFoodList.get(position);
         holder.setData(selectFood, position);
         holder.bDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("ASDASd");
+                mFoodList.remove(position);
+                notifyDataSetChanged();
             }
         });
     }

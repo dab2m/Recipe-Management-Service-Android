@@ -34,7 +34,8 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
-            android:src="@drawable/no"/>
+            android:src="@drawable/no"
+            />
 
         <Button
             android:id="@+id/btnResimEkle"
