@@ -18,35 +18,40 @@
         android:textStyle="bold" />
 
     <TextView
-        android:layout_marginTop="40dp"
-        android:text="Username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"/>
+        android:layout_marginTop="40dp"
+        android:text="Username"
+        android:textColor="@color/cardview_light_background"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+        android:textColor="@color/cardview_light_background" />
 
     <TextView
-        android:text="Password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"/>
+        android:text="Password"
+        android:textColor="@color/cardview_light_background"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
-        android:inputType="textPassword"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+        android:inputType="textPassword"
+        android:textColor="@color/cardview_light_background" />
 
     <Button
         android:id="@+id/bRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
-        android:text="Register" />
+        android:text="Register"
+        android:textColor="@color/cardview_light_background" />
 </LinearLayout>

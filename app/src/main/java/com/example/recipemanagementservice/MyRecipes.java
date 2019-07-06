@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+/**
+ * Created by mustafatozluoglu on 06.07.2019
+ */
 public class MyRecipes extends AppCompatActivity {
 
     RecyclerView recyclerView;

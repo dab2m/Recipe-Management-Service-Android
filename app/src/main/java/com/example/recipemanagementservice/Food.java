@@ -54,6 +54,10 @@ public class Food {
         this.foodTag = foodTag;
     }
 
+    public String toString() {
+        return foodName + "\n" + foodImage + "\n" + foodDescription + "\n" + foodTag + "\n";
+    }
+
     public static ArrayList<Food> getData() {
         ArrayList<Food> foodList = new ArrayList<Food>();
         int foodImages[] = {R.drawable.frambuazli_pasta, R.drawable.fondu, R.drawable.nohutlu_pilav};

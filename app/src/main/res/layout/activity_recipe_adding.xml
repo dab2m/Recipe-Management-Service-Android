@@ -40,11 +40,12 @@
         <Button
             android:id="@+id/btnResimEkle"
             android:layout_width="200dp"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:background="@drawable/rounded_button"
             android:backgroundTint="@color/amber"
-            android:text="Resim Ekle" />
+            android:text="Resim Ekle"
+            android:textColor="@color/cardview_light_background" />
 
         <EditText
             android:id="@+id/etyemekAciklamasi"
@@ -75,7 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="50"
                 android:background="@drawable/rounded_button"
-                android:text="Kaydet" />
+                android:text="Kaydet"
+                android:textColor="@color/cardview_light_background" />
 
             <Button
                 android:id="@+id/btnIptalEt"
@@ -84,7 +86,8 @@
                 android:layout_weight="50"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/red"
-                android:text="Iptal Et" />
+                android:text="Iptal Et"
+                android:textColor="@color/cardview_light_background" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

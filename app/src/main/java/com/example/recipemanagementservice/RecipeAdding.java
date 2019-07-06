@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import java.io.ByteArrayOutputStream;
 
 /**
@@ -63,6 +64,7 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
                     Food food = new Food(foodName, foodImage, foodDescription, foodTags);
                     DatabaseHelper db = new DatabaseHelper(getApplicationContext());
                     db.insertFoodData(food);
+
                     Toast.makeText(getApplicationContext(), "Adding is successful", Toast.LENGTH_LONG).show();
                     etYemekIsmi.setText("");
                     imgYemekResmi.setImageResource(R.drawable.no);
