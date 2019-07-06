@@ -7,15 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <TextView
-    android:id="@+id/loginPage"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:textSize="40sp"
-    android:text="Yemek Tarifi Giriş"
-    android:textColor="@color/colorWhite"
-    android:textStyle="bold" />
+
 
     <TextView
         android:layout_marginTop="40dp"

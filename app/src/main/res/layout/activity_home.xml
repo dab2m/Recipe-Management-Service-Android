@@ -8,7 +8,6 @@
     android:background="@drawable/background">
 
     <LinearLayout
-        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -38,7 +37,7 @@
 
     <SearchView
         android:id="@+id/yemekArama"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_width="385dp"
         android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"
@@ -55,10 +54,8 @@
         android:id="@+id/YemekTarifleri"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
-        android:text="Yemek Tarifleri"
+        android:text="Bütün Yemek Tarifleri"
         android:textColor="@color/amber"
         android:textSize="30sp"
         android:textStyle="bold"/>
