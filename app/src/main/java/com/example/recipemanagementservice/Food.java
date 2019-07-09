@@ -54,9 +54,12 @@ public class Food {
         this.foodTag = foodTag;
     }
 
-    public String toString() {
-        return foodName + "\n" + foodImage + "\n" + foodDescription + "\n" + foodTag + "\n";
+    public String toLink() {
+        return "tarif.php?ismi=" + foodName + "&ttags" + foodTag + "&link=" + foodImage + "&desc=" + foodDescription;
     }
+
+    public String toString() {
+        return "\nFood name: " + foodName + "\nFood image: " + foodImage + "\nFood description: " + foodDescription + "\nFood tags: " + foodTag + "\n";    }
 
     public static ArrayList<Food> getData() {
         ArrayList<Food> foodList = new ArrayList<Food>();

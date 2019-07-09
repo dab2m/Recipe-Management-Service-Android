@@ -40,5 +40,13 @@
             android:textSize="16dp"
             android:text="@string/food_tags"/>
 
+        <Button
+            android:id="@+id/bBegen"
+            android:layout_width="50dp"
+            android:background="@drawable/ic_favorite"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/red"
+            android:text="" />
     </LinearLayout>
 </LinearLayout>

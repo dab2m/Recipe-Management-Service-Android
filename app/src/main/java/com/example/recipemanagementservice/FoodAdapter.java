@@ -65,6 +65,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
         TextView foodName, foodDescription, foodTag;
         ImageView foodImage;
         Button bDelete;
+        Button bBegen;
 
         public MyViewHolder(View itemView) {
             super(itemView);

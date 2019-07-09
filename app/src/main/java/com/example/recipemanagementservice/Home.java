@@ -19,6 +19,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
     Button bTariflerim;
     Button bAyarlar;
     Button bBildirim;
+    Button bBegen;
     SearchView yemekArama;
     ListView yemekListesi;
 
@@ -34,12 +35,14 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
         bTariflerim = (Button) findViewById(R.id.bTariflerim);
         bAyarlar = (Button) findViewById(R.id.bAyarlar);
         bBildirim = (Button) findViewById(R.id.bBildirim);
+        bBegen = (Button) findViewById(R.id.bBegen);
 
 
         bYeniYemekTarifi.setOnClickListener(this);
         bTariflerim.setOnClickListener(this);
         bAyarlar.setOnClickListener(this);
         bBildirim.setOnClickListener(this);
+        //bBegen.setOnClickListener(this);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recylerview);
@@ -65,6 +68,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
                 break;
             case R.id.bBildirim:
                 startActivity(new Intent(this, MyNotification.class));
+                break;
+            case R.id.bBegen:
+                System.out.println("begenilindilindi.");
                 break;
         }
     }
