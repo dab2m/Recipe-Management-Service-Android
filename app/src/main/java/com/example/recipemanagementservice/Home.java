@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +24,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
 
     JSONParser jsonParser;
     ProgressDialog progressDialog;
-    FoodAdapter foodAdapter;
+    FoodAdapterForHome foodAdapter;
 
     private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/rest.php?list";
 
@@ -37,7 +36,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
     SearchView yemekArama; // TODO search ozelligi eklenecek
     ListView yemekListesi;
 
-    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +58,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
         bTariflerim.setOnClickListener(this);
         bAyarlar.setOnClickListener(this);
         bBildirim.setOnClickListener(this);
-        //bBegen.setOnClickListener(this);
+        //bBegen.setOnClickListener(this); //TODO begen butonuna null geliyor yorumdan cikarinca program patliyor.
 
-
-        recyclerView = (RecyclerView) findViewById(R.id.recylerview);
-        //FoodAdapter foodAdapter = new FoodAdapter(this, Food.getData(), 1);
-        //recyclerView.setAdapter(foodAdapter);
-
-        /*LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);*/
     }
 
     @Override
@@ -120,7 +110,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            foodAdapter = new FoodAdapter(Home.this, recipeArrayList);
+            foodAdapter = new FoodAdapterForHome(Home.this, recipeArrayList);
 
             if (progressDialog.isShowing()) {
                 yemekListesi.setAdapter(foodAdapter);
@@ -162,8 +152,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
                         recipeTags = new StringBuilder(recipeTags.substring(0, recipeTags.length() - 2));
                         String created = recipe.getString("created");
                         String recipeDate = recipe.getString("recipeDate");
+                        int likes = recipe.getInt("likes");
 
-                        Food food = new Food(recipeId, recipeName, recipeImage, recipeDescription, recipeTags.toString(), created, recipeDate);
+                        Food food = new Food(recipeId, recipeName, recipeImage, recipeDescription, recipeTags.toString(), created, recipeDate, likes);
                         recipeArrayList.add(food);
                     }
 

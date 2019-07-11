@@ -1,7 +1,5 @@
 package com.example.recipemanagementservice;
 
-import java.util.ArrayList;
-
 /**
  * Created by mustafatozluoglu on 14.06.2019
  */
@@ -13,12 +11,13 @@ public class Food {
     private String foodTags;
     private String foodCreated;
     private String foodDate;
+    private int likes;
 
     public Food() {
 
     }
 
-    public Food(String foodId, String foodName, String foodImage, String foodDescription, String foodTags, String foodCreated, String foodDate) {
+    public Food(String foodId, String foodName, String foodImage, String foodDescription, String foodTags, String foodCreated, String foodDate,int likes) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.foodImage = foodImage;
@@ -26,6 +25,7 @@ public class Food {
         this.foodTags = foodTags;
         this.foodCreated = foodCreated;
         this.foodDate = foodDate;
+        this.likes = likes;
     }
 
     public String getFoodId() {
@@ -84,6 +84,14 @@ public class Food {
         this.foodDate = foodDate;
     }
 
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
     @Override
     public String toString() {
         return "Food{" +
@@ -96,19 +104,4 @@ public class Food {
                 ", foodDate='" + foodDate + '\'' +
                 '}';
     }
-
-    public static ArrayList<Food> getData() {
-        ArrayList<Food> foodList = new ArrayList<Food>();
-        int foodImages[] = {R.drawable.frambuazli_pasta, R.drawable.fondu, R.drawable.nohutlu_pilav};
-        String[] foodNames = {"Ozel Kremalı Frambuazlı Yaş Pasta", "Fondü", "Nohutlu Pilav"};
-
-        for (int i = 0; i < foodImages.length; i++) {
-            Food temp = new Food();
-            temp.setFoodName(foodNames[i]);
-            temp.setFoodDescription("description");
-            foodList.add(temp);
-        }
-        return foodList;
-    }
-
 }

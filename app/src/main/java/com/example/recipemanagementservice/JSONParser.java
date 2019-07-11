@@ -12,7 +12,6 @@ import java.net.URL;
  * Created by mustafatozluoglu on 10.07.2019
  */
 public class JSONParser {
-    // http://recipemanagementservice495.herokuapp.com/rest.php?list
 
     public JSONParser() {
 
@@ -39,15 +38,15 @@ public class JSONParser {
         String satir = "";
 
         try {
-            while ((satir = reader.readLine())!= null){
+            while ((satir = reader.readLine()) != null) {
                 sb.append(satir).append("\n");
             }
         } catch (IOException e) {
 
         } finally {
-            try{
+            try {
                 is.close();
-            }catch (IOException e){
+            } catch (IOException e) {
 
             }
         }

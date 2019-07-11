@@ -27,8 +27,8 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recylerview"
+    <ListView
+        android:id="@+id/tariflerimYemekListesi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"></ListView>
 </LinearLayout>
