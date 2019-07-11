@@ -78,7 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(FOOD_NAME,food.getFoodName());
         contentValues.put(FOOD_IMG,food.getFoodImage());
         contentValues.put(FOOD_DESC,food.getFoodDescription());
-        contentValues.put(FOOD_TAGS,food.getFoodTag());
+        //contentValues.put(FOOD_TAGS,food.getFoodTag());
 
         db.insert(FOOD_TABLE_NAME,null,contentValues);
         db.close();

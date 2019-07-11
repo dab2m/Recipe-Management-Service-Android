@@ -6,20 +6,34 @@ import java.util.ArrayList;
  * Created by mustafatozluoglu on 14.06.2019
  */
 public class Food {
+    private String foodId;
     private String foodName;
-    private int foodImage;
+    private String foodImage;
     private String foodDescription;
-    private String foodTag;
+    private String foodTags;
+    private String foodCreated;
+    private String foodDate;
 
     public Food() {
 
     }
 
-    public Food(String foodName, int foodImage, String foodDescription, String foodTag) {
+    public Food(String foodId, String foodName, String foodImage, String foodDescription, String foodTags, String foodCreated, String foodDate) {
+        this.foodId = foodId;
         this.foodName = foodName;
         this.foodImage = foodImage;
         this.foodDescription = foodDescription;
-        this.foodTag = foodTag;
+        this.foodTags = foodTags;
+        this.foodCreated = foodCreated;
+        this.foodDate = foodDate;
+    }
+
+    public String getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(String foodId) {
+        this.foodId = foodId;
     }
 
     public String getFoodName() {
@@ -30,11 +44,11 @@ public class Food {
         this.foodName = foodName;
     }
 
-    public int getFoodImage() {
+    public String getFoodImage() {
         return foodImage;
     }
 
-    public void setFoodImage(int foodImage) {
+    public void setFoodImage(String foodImage) {
         this.foodImage = foodImage;
     }
 
@@ -46,20 +60,42 @@ public class Food {
         this.foodDescription = foodDescription;
     }
 
-    public String getFoodTag() {
-        return foodTag;
+    public String getFoodTags() {
+        return foodTags;
     }
 
-    public void setFoodTag(String foodTag) {
-        this.foodTag = foodTag;
+    public void setFoodTags(String foodTags) {
+        this.foodTags = foodTags;
     }
 
-    public String toLink() {
-        return "tarif.php?ismi=" + foodName + "&ttags" + foodTag + "&link=" + foodImage + "&desc=" + foodDescription;
+    public String getFoodCreated() {
+        return foodCreated;
     }
 
+    public void setFoodCreated(String foodCreated) {
+        this.foodCreated = foodCreated;
+    }
+
+    public String getFoodDate() {
+        return foodDate;
+    }
+
+    public void setFoodDate(String foodDate) {
+        this.foodDate = foodDate;
+    }
+
+    @Override
     public String toString() {
-        return "\nFood name: " + foodName + "\nFood image: " + foodImage + "\nFood description: " + foodDescription + "\nFood tags: " + foodTag + "\n";    }
+        return "Food{" +
+                "foodId='" + foodId + '\'' +
+                ", foodName='" + foodName + '\'' +
+                ", foodImage='" + foodImage + '\'' +
+                ", foodDescription='" + foodDescription + '\'' +
+                ", foodTags=" + foodTags +
+                ", foodCreated='" + foodCreated + '\'' +
+                ", foodDate='" + foodDate + '\'' +
+                '}';
+    }
 
     public static ArrayList<Food> getData() {
         ArrayList<Food> foodList = new ArrayList<Food>();
@@ -68,12 +104,11 @@ public class Food {
 
         for (int i = 0; i < foodImages.length; i++) {
             Food temp = new Food();
-            temp.setFoodImage(foodImages[i]);
             temp.setFoodName(foodNames[i]);
             temp.setFoodDescription("description");
-            temp.setFoodTag("recipe");
             foodList.add(temp);
         }
         return foodList;
     }
+
 }

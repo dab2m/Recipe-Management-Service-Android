@@ -1,26 +1,40 @@
 package com.example.recipemanagementservice;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by mustafatozluoglu on 10.06.2019
  */
 public class Home extends AppCompatActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
 
+    JSONParser jsonParser;
+    ProgressDialog progressDialog;
+    FoodAdapter foodAdapter;
+
+    private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/rest.php?list";
+
     Button bYeniYemekTarifi;
     Button bTariflerim;
     Button bAyarlar;
     Button bBildirim;
     Button bBegen;
-    SearchView yemekArama;
+    SearchView yemekArama; // TODO search ozelligi eklenecek
     ListView yemekListesi;
 
     RecyclerView recyclerView;
@@ -29,6 +43,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        yemekListesi = (ListView) findViewById(R.id.yemekListesi);
+
+        new getRecipe().execute();
 
 
         bYeniYemekTarifi = (Button) findViewById(R.id.bYeniYemekTarifi);
@@ -46,12 +64,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recylerview);
-        FoodAdapter foodAdapter = new FoodAdapter(this, Food.getData(), 1);
-        recyclerView.setAdapter(foodAdapter);
+        //FoodAdapter foodAdapter = new FoodAdapter(this, Food.getData(), 1);
+        //recyclerView.setAdapter(foodAdapter);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        /*LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(linearLayoutManager);*/
     }
 
     @Override
@@ -70,7 +88,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
                 startActivity(new Intent(this, MyNotification.class));
                 break;
             case R.id.bBegen:
-                System.out.println("begenilindilindi.");
+                // TODO begenme islemi yapilacak
+                System.out.println("liked.");
                 break;
         }
     }
@@ -83,6 +102,81 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
     @Override
     public boolean onQueryTextChange(String s) {
         return false;
+    }
+
+    private class getRecipe extends AsyncTask<Void, Void, Void> {
+
+        ArrayList<Food> recipeArrayList = new ArrayList<>();
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(Home.this);
+            progressDialog.setMessage("Processing...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            foodAdapter = new FoodAdapter(Home.this, recipeArrayList);
+
+            if (progressDialog.isShowing()) {
+                yemekListesi.setAdapter(foodAdapter);
+                progressDialog.dismiss();
+            }
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            jsonParser = new JSONParser();
+            String jsonString = null;
+            try {
+                jsonString = jsonParser.makeServiceCall(homepageURL);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            Log.d("JSON_RESPONSE", jsonString);
+
+            if (jsonString != null) {
+
+
+                try {
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    JSONArray recipes = jsonObject.getJSONArray("Recipes");
+
+                    for (int i = 0; i < recipes.length(); i++) {
+                        JSONObject recipe = recipes.getJSONObject(i);
+                        String recipeId = recipe.getString("recipeId");
+                        String recipeName = recipe.getString("recipeName");
+                        String recipeImage = recipe.getString("recipeImage");
+                        String recipeDescription = recipe.getString("recipeDescription");
+                        JSONArray recipeTagsArray = recipe.getJSONArray("recipeTags");
+                        StringBuilder recipeTags = new StringBuilder();
+                        for (int j = 0; j < recipeTagsArray.length(); j++)
+                            recipeTags.append(recipeTagsArray.getString(j)).append(", ");
+                        recipeTags = new StringBuilder(recipeTags.substring(0, recipeTags.length() - 2));
+                        String created = recipe.getString("created");
+                        String recipeDate = recipe.getString("recipeDate");
+
+                        Food food = new Food(recipeId, recipeName, recipeImage, recipeDescription, recipeTags.toString(), created, recipeDate);
+                        recipeArrayList.add(food);
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+                Log.d("JSON_RESPONSE", "Empty page resource!");
+            }
+            return null;
+        }
     }
 
 }

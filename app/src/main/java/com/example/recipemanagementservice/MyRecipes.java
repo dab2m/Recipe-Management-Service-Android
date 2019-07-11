@@ -18,8 +18,8 @@ public class MyRecipes extends AppCompatActivity {
         setContentView(R.layout.activity_my_recipes);
 
         recyclerView = (RecyclerView) findViewById(R.id.recylerview);
-        FoodAdapter foodAdapter = new FoodAdapter(this, Food.getData(), 2);
-        recyclerView.setAdapter(foodAdapter);
+        //FoodAdapter foodAdapter = new FoodAdapter(this, Food.getData(), 2);
+        //recyclerView.setAdapter(foodAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

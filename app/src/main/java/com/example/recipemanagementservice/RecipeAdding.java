@@ -61,9 +61,9 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
                 if (foodName.isEmpty() || foodDescription.isEmpty() || foodTags.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_LONG).show();
                 } else {
-                    Food food = new Food(foodName, foodImage, foodDescription, foodTags);
-                    DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-                    db.insertFoodData(food);
+                    //Food food = new Food(foodName, foodImage, foodDescription, foodTags);
+                    //DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+                    //db.insertFoodData(food);
 
                     Toast.makeText(getApplicationContext(), "Adding is successful", Toast.LENGTH_LONG).show();
                     etYemekIsmi.setText("");

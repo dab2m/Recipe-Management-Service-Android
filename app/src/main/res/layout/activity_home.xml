@@ -20,6 +20,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
             android:layout_marginRight="20dp"
+            android:backgroundTint="@color/blue"
             android:background="@drawable/rounded_button"
             android:text="  Yeni Yemek Tarifi   "
             android:textColor="@color/cardview_light_background" />
@@ -31,6 +32,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
             android:layout_marginRight="20dp"
+            android:backgroundTint="@color/blue"
             android:background="@drawable/rounded_button"
             android:text="Tariflerim"
             android:textColor="@color/cardview_light_background" />
@@ -40,6 +42,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="4dp"
+            android:backgroundTint="@color/amber"
             android:background="@drawable/ic_notifications" />
 
         <Button
@@ -48,6 +51,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="4dp"
+            android:backgroundTint="@color/red"
             android:background="@drawable/ic_settings" />
 
     </LinearLayout>
@@ -60,13 +64,9 @@
         android:layout_marginTop="4dp"
         android:background="@color/colorWhite"></SearchView>
 
-    <ListView
-        android:id="@+id/yemekListesi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
 
     <TextView
-        android:id="@+id/YemekTarifleri"
+        android:id="@+id/butunYemekTarifleri"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -75,8 +75,8 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recylerview"
+    <ListView
+        android:id="@+id/yemekListesi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"></ListView>
 </LinearLayout>
