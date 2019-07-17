@@ -94,5 +94,4 @@ public class FoodAdapterForHome extends BaseAdapter {
             imageView.setImageBitmap(result);
         }
     }
-
 }

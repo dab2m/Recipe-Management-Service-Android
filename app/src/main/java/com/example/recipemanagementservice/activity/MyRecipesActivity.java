@@ -43,10 +43,7 @@ public class MyRecipesActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_my_recipes);
         bDelete = (Button) findViewById(R.id.bDelete);
         tariflerimYemekListesi = (ListView) findViewById(R.id.tariflerimYemekListesi);
-
         //bDelete.setOnClickListener(this);
-
-
         SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE); // LoginActivity sayfasindan username'i almak icin kullanildi!
         username = prefs.getString("username", "UNKNOWN");
         new getRecipe().execute();
@@ -117,7 +114,6 @@ public class MyRecipesActivity extends AppCompatActivity implements View.OnClick
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             } else {
                 Log.d("JSON_RESPONSE", "Empty page resource!");
             }
