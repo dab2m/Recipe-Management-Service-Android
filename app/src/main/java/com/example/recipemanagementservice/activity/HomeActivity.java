@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     ProgressDialog progressDialog;
     FoodAdapterForHome foodAdapter;
 
-    private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/rest.php?list";
+    private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/get.php?list";
 
     Button bYeniYemekTarifi;
     Button bTariflerim;

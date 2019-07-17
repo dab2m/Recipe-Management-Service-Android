@@ -33,7 +33,7 @@ public class MyRecipesActivity extends AppCompatActivity implements View.OnClick
     ProgressDialog progressDialog;
     FoodAdapterForMyRecipes foodAdapter;
     private static String username;
-    private static String myRecipesURL = "http://recipemanagementservice495.herokuapp.com/rest.php?tariflerim=";
+    private static String myRecipesURL = "http://recipemanagementservice495.herokuapp.com/get.php?tariflerim=";
     ListView tariflerimYemekListesi;
     Button bDelete;
 
@@ -41,6 +41,8 @@ public class MyRecipesActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_recipes);
+
+
         bDelete = (Button) findViewById(R.id.bDelete);
         tariflerimYemekListesi = (ListView) findViewById(R.id.tariflerimYemekListesi);
 
