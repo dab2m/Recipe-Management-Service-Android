@@ -56,7 +56,9 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
             case R.id.btnKaydet:
                 String foodName = etYemekIsmi.getText().toString();
                 String foodDescription = etYemekAciklamasi.getText().toString();
+                String tags[] = new String[1];
                 String foodTags = etYemekEtiketleri.getText().toString();
+                tags[0] = foodTags;
                 int foodImage = imageViewToInt(imgYemekResmi);
                 if (foodName.isEmpty() || foodDescription.isEmpty() || foodTags.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_LONG).show();

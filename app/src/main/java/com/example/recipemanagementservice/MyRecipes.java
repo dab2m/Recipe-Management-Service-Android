@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class MyRecipes extends AppCompatActivity implements View.OnClickListener {
 
     ArrayList<Food> recipeArrayList = new ArrayList<>();
-    Login login = new Login();
 
     JSONParser jsonParser;
     ProgressDialog progressDialog;
@@ -39,8 +38,9 @@ public class MyRecipes extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_my_recipes);
 
         bDelete = (Button) findViewById(R.id.bDelete);
-        //bDelete.setOnClickListener(this);
         tariflerimYemekListesi = (ListView) findViewById(R.id.tariflerimYemekListesi);
+
+        //bDelete.setOnClickListener(this);
 
 
         SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE); // Login sayfasindan username'i almak icin kullanildi!
@@ -54,6 +54,7 @@ public class MyRecipes extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bDelete:
+                String deleteUrl = "http://recipemanagementservice495.herokuapp.com/rest.php?tariflerim=";
                 recipeArrayList.remove(0); // TODO remove islemi yapilacak deneme icin 0 verdim
                 break;
         }

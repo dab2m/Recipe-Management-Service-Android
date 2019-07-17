@@ -157,17 +157,13 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
                         Food food = new Food(recipeId, recipeName, recipeImage, recipeDescription, recipeTags.toString(), created, recipeDate, likes);
                         recipeArrayList.add(food);
                     }
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             } else {
                 Log.d("JSON_RESPONSE", "Empty page resource!");
             }
             return null;
         }
     }
-
 }
