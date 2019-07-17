@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-
     <TextView
         android:layout_width="391dp"
         android:layout_height="wrap_content"
@@ -23,7 +22,6 @@
         android:layout_width="377dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp" />
-
 
     <Button
         android:id="@+id/btOnayla"
