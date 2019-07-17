@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +16,20 @@ import android.widget.Toast;
 
 import com.example.recipemanagementservice.R;
 
+import org.json.JSONObject;
+
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * Created by Berk on 10.06.2019.
@@ -30,6 +44,13 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
     Button btnIptalet;
     Button btnResimEkle;
     Uri imageUri;
+
+    private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/get.php?list";
+
+    String foodName;
+    String foodDescription;
+    String tags[];
+    String foodTags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +77,10 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
                 startActivityForResult(intent, 100);
                 break;
             case R.id.btnKaydet:
-                String foodName = etYemekIsmi.getText().toString();
-                String foodDescription = etYemekAciklamasi.getText().toString();
-                String tags[] = new String[1];
-                String foodTags = etYemekEtiketleri.getText().toString();
+                foodName = etYemekIsmi.getText().toString();
+                foodDescription = etYemekAciklamasi.getText().toString();
+                tags = new String[1];
+                foodTags = etYemekEtiketleri.getText().toString();
                 tags[0] = foodTags;
                 int foodImage = imageViewToInt(imgYemekResmi);
                 if (foodName.isEmpty() || foodDescription.isEmpty() || foodTags.isEmpty()) {
@@ -73,6 +94,12 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
                     imgYemekResmi.setImageResource(R.drawable.no);
                     etYemekAciklamasi.setText("");
                     etYemekEtiketleri.setText("");
+                    try{
+                        sendPost(homepageURL);
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
                 break;
             case R.id.btnIptalEt:
@@ -98,5 +125,87 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
             imageUri = data.getData();
             imgYemekResmi.setImageURI(imageUri);
         }
+    }
+
+    /*public void sendPost(String requestUrl) throws IOException {
+        try {
+            URL url = new URL(requestUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            JSONObject jsonParam = new JSONObject();
+            jsonParam.put("recipeId", "123");
+            jsonParam.put("recipeName", foodName);
+            jsonParam.put("recipeImage", "fotograflar\\no.png");
+            jsonParam.put("recipeDescription", foodDescription);
+            jsonParam.put("recipeTags", tags[0]);
+            jsonParam.put("created", "berkay");
+            jsonParam.put("recipeDate", "2019-07-12");
+            jsonParam.put("likes", "5");
+            System.out.println(1);
+            Log.i("JSON", jsonParam.toString());
+            byte[] bytes = jsonParam.toString().getBytes("UTF-8");
+            System.out.println(2);
+            DataOutputStream  os = new DataOutputStream (conn.getOutputStream());
+            System.out.println(3);
+            //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+            System.out.println(os.toString());
+            System.out.println(1);
+            os.write(bytes);
+            os.flush();
+            os.close();
+            Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+            Log.i("MSG", conn.getResponseMessage());
+            conn.disconnect();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }*/
+
+    public void sendPost(final String requestUrl) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(requestUrl);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                    conn.setRequestProperty("Accept","application/json");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    JSONObject jsonParam = new JSONObject();
+                    jsonParam.put("recipeId", "123");
+                    jsonParam.put("recipeName", foodName);
+                    jsonParam.put("recipeImage", "fotograflar\\no.png");
+                    jsonParam.put("recipeDescription", foodDescription);
+                    jsonParam.put("recipeTags", tags[0]);
+                    jsonParam.put("created", "berkay");
+                    jsonParam.put("recipeDate", "2019-07-12");
+                    jsonParam.put("likes", "5");
+                    System.out.println(1);
+                    Log.i("JSON", jsonParam.toString());
+                    byte[] bytes = jsonParam.toString().getBytes("UTF-8");
+                    System.out.println(2);
+                    DataOutputStream  os = new DataOutputStream (conn.getOutputStream());
+                    System.out.println(3);
+                    //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                    System.out.println(os.size());
+                    os.writeBytes(jsonParam.toString());
+                    os.flush();
+                    os.close();
+                    System.out.println(4);
+                    Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                    Log.i("MSG", conn.getResponseMessage());
+                    conn.disconnect();
+                    System.out.println(5);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
     }
 }
