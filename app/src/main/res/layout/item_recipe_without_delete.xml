@@ -46,7 +46,6 @@
             android:background="@drawable/ic_favorite"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:backgroundTint="@color/red"
-            android:text="" />
+            android:backgroundTint="@color/red"/>
     </LinearLayout>
 </LinearLayout>

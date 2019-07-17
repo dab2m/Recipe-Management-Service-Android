@@ -1,4 +1,4 @@
-package com.example.recipemanagementservice;
+package com.example.recipemanagementservice.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.recipemanagementservice.model.FoodModel;
+import com.example.recipemanagementservice.model.UserModel;
 
 /**
  * Created by mustafatozluoglu on 6.06.2019
@@ -13,8 +15,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     SQLiteDatabase db;
-    public User user;
-
+    public UserModel user;
 
     private static final String DATABASE_NAME = "yemek_tarifi.sqlite";
 
@@ -25,7 +26,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + REGISTER_TABLE_NAME + " ("
             + USERNAME + " TEXT, "
             + PASSWORD + " TEXT )";
-
     public static final String FOOD_TABLE_NAME = "foods";
     public static final String FOOD_NAME = "Food_Name";
     public static final String FOOD_IMG = "Food_Image";
@@ -37,7 +37,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + FOOD_IMG + " BLOB, "
             + FOOD_DESC + " TEXT, "
             + FOOD_TAGS + " TEXT )";
-
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -57,41 +56,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void insertUserData(User user) {
+    public void insertUserData(UserModel user) {
         this.user = user;
         db = this.getWritableDatabase();
-
         ContentValues contentValues = new ContentValues();
         contentValues.put(USERNAME, user.getUsername());
         contentValues.put(PASSWORD, user.getPassword());
-
         db.insert(REGISTER_TABLE_NAME, null, contentValues);
         db.close();
     }
 
-
-
-    public void insertFoodData(Food food){
+    public void insertFoodData(FoodModel foodModel){
         db = this.getWritableDatabase();
-
         ContentValues contentValues = new ContentValues();
-        contentValues.put(FOOD_NAME,food.getFoodName());
-        contentValues.put(FOOD_IMG,food.getFoodImage());
-        contentValues.put(FOOD_DESC,food.getFoodDescription());
-        //contentValues.put(FOOD_TAGS,food.getFoodTag());
-
+        contentValues.put(FOOD_NAME, foodModel.getFoodName());
+        contentValues.put(FOOD_IMG, foodModel.getFoodImage());
+        contentValues.put(FOOD_DESC, foodModel.getFoodDescription());
+        //contentValues.put(FOOD_TAGS,foodModel.getFoodTag());
         db.insert(FOOD_TABLE_NAME,null,contentValues);
         db.close();
-
     }
 
     public String searchPass(String username) {
         db = this.getReadableDatabase();
         String query = "select username, password from " + REGISTER_TABLE_NAME;
         Cursor cursor = db.rawQuery(query, null);
-
         String user, pass = null;
-
         if (cursor.moveToFirst()) {
             do {
                 user = cursor.getString(0);
@@ -103,5 +93,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return pass;
     }
-
 }

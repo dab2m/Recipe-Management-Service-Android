@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyNotification"></activity>
-        <activity android:name=".MySettings" />
-        <activity android:name=".MyRecipes" />
-        <activity android:name=".RecipeAdding" />
-        <activity android:name=".Home" />
-        <activity android:name=".Register" />
-        <activity android:name=".Login">
+        <activity android:name=".activity.MyNotificationActivity"></activity>
+        <activity android:name=".activity.MySettingsActivity" />
+        <activity android:name=".activity.MyRecipesActivity" />
+        <activity android:name=".activity.RecipeAddingActivity" />
+        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

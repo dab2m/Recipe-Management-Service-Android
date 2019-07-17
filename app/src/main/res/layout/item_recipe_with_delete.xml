@@ -22,7 +22,7 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_gravity="center"
-            android:src="@drawable/no" />
+            android:src="@drawable/no"/>
 
         <TextView
             android:id="@+id/tvYemekAciklamasi"
@@ -46,7 +46,6 @@
             android:background="@drawable/ic_delete"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:backgroundTint="@color/red"
-            android:text="" />
+            android:backgroundTint="@color/red"/>
     </LinearLayout>
 </LinearLayout>

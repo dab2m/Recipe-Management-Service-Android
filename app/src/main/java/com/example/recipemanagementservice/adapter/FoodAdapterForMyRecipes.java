@@ -1,4 +1,4 @@
-package com.example.recipemanagementservice;
+package com.example.recipemanagementservice.adapter;
 
 import android.app.Activity;
 import android.app.Service;
@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.recipemanagementservice.R;
+import com.example.recipemanagementservice.model.FoodModel;
+
 import java.util.ArrayList;
 
 /**
@@ -17,18 +21,16 @@ import java.util.ArrayList;
 public class FoodAdapterForMyRecipes extends BaseAdapter {
 
     Context context;
-    ArrayList<Food> recipeArrayList;
+    ArrayList<FoodModel> recipeArrayList;
     LayoutInflater layoutInflater;
 
-    public FoodAdapterForMyRecipes(Activity activity, ArrayList<Food> recipeArrayList){
+    public FoodAdapterForMyRecipes(Activity activity, ArrayList<FoodModel> recipeArrayList){
         this.context = activity;
         this.recipeArrayList = recipeArrayList;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-
     }
 
     public FoodAdapterForMyRecipes() {
-
     }
 
     @Override
@@ -58,8 +60,6 @@ public class FoodAdapterForMyRecipes extends BaseAdapter {
         // TODO yemek resmi ayarlanacak
         recipeDecription.setText(recipeArrayList.get(i).getFoodDescription());
         recipeTags.setText(recipeArrayList.get(i).getFoodTags());
-
         return view;
     }
 }
-

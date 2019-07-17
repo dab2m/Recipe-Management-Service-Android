@@ -1,7 +1,7 @@
-package com.example.recipemanagementservice;
+package com.example.recipemanagementservice.activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SearchView;
+
+import com.example.recipemanagementservice.R;
+import com.example.recipemanagementservice.adapter.FoodAdapterForMyRecipes;
+import com.example.recipemanagementservice.model.FoodModel;
+import com.example.recipemanagementservice.network.JSONParser;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,90 +22,52 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by mustafatozluoglu on 10.06.2019
+ * Created by mustafatozluoglu on 06.07.2019
  */
-public class Home extends AppCompatActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
 
+public class MyRecipesActivity extends AppCompatActivity implements View.OnClickListener {
+
+    ArrayList<FoodModel> recipeArrayList = new ArrayList<>();
+    LoginActivity login = new LoginActivity();
     JSONParser jsonParser;
     ProgressDialog progressDialog;
-    FoodAdapterForHome foodAdapter;
-
-    private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/rest.php?list";
-
-    Button bYeniYemekTarifi;
-    Button bTariflerim;
-    Button bAyarlar;
-    Button bBildirim;
-    Button bBegen;
-    SearchView yemekArama; // TODO search ozelligi eklenecek
-    ListView yemekListesi;
-
+    FoodAdapterForMyRecipes foodAdapter;
+    private static String username;
+    private static String myRecipesURL = "http://recipemanagementservice495.herokuapp.com/rest.php?tariflerim=";
+    ListView tariflerimYemekListesi;
+    Button bDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_my_recipes);
+        bDelete = (Button) findViewById(R.id.bDelete);
+        tariflerimYemekListesi = (ListView) findViewById(R.id.tariflerimYemekListesi);
 
-        yemekListesi = (ListView) findViewById(R.id.yemekListesi);
+        //bDelete.setOnClickListener(this);
 
+
+        SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE); // LoginActivity sayfasindan username'i almak icin kullanildi!
+        username = prefs.getString("username", "UNKNOWN");
         new getRecipe().execute();
-
-
-        bYeniYemekTarifi = (Button) findViewById(R.id.bYeniYemekTarifi);
-        bTariflerim = (Button) findViewById(R.id.bTariflerim);
-        bAyarlar = (Button) findViewById(R.id.bAyarlar);
-        bBildirim = (Button) findViewById(R.id.bBildirim);
-        bBegen = (Button) findViewById(R.id.bBegen);
-
-
-        bYeniYemekTarifi.setOnClickListener(this);
-        bTariflerim.setOnClickListener(this);
-        bAyarlar.setOnClickListener(this);
-        bBildirim.setOnClickListener(this);
-        //bBegen.setOnClickListener(this); //TODO begen butonuna null geliyor yorumdan cikarinca program patliyor.
-
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bYeniYemekTarifi:
-                startActivity(new Intent(this, RecipeAdding.class));
-                break;
-            case R.id.bTariflerim:
-                startActivity(new Intent(this, MyRecipes.class));
-                break;
-            case R.id.bAyarlar:
-                startActivity(new Intent(this, MySettings.class));
-                break;
-            case R.id.bBildirim:
-                startActivity(new Intent(this, MyNotification.class));
-                break;
-            case R.id.bBegen:
-                // TODO begenme islemi yapilacak
-                System.out.println("liked.");
+            case R.id.bDelete:
+                String deleteUrl = "http://recipemanagementservice495.herokuapp.com/rest.php?tariflerim=";
+                recipeArrayList.remove(0); // TODO remove islemi yapilacak deneme icin 0 verdim
                 break;
         }
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String s) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String s) {
-        return false;
-    }
-
     private class getRecipe extends AsyncTask<Void, Void, Void> {
-
-        ArrayList<Food> recipeArrayList = new ArrayList<>();
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new ProgressDialog(Home.this);
+            progressDialog = new ProgressDialog(MyRecipesActivity.this);
             progressDialog.setMessage("Processing...");
             progressDialog.setCancelable(false);
             progressDialog.show();
@@ -110,13 +76,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            foodAdapter = new FoodAdapterForHome(Home.this, recipeArrayList);
-
+            foodAdapter = new FoodAdapterForMyRecipes(MyRecipesActivity.this, recipeArrayList);
             if (progressDialog.isShowing()) {
-                yemekListesi.setAdapter(foodAdapter);
+                tariflerimYemekListesi.setAdapter(foodAdapter);
                 progressDialog.dismiss();
             }
-
         }
 
         @Override
@@ -124,21 +88,15 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
             jsonParser = new JSONParser();
             String jsonString = null;
             try {
-                jsonString = jsonParser.makeServiceCall(homepageURL);
+                jsonString = jsonParser.makeServiceCall(myRecipesURL + username);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
             Log.d("JSON_RESPONSE", jsonString);
-
             if (jsonString != null) {
-
-
                 try {
                     JSONObject jsonObject = new JSONObject(jsonString);
                     JSONArray recipes = jsonObject.getJSONArray("Recipes");
-
                     for (int i = 0; i < recipes.length(); i++) {
                         JSONObject recipe = recipes.getJSONObject(i);
                         String recipeId = recipe.getString("recipeId");
@@ -153,13 +111,13 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Sea
                         String created = recipe.getString("created");
                         String recipeDate = recipe.getString("recipeDate");
                         int likes = recipe.getInt("likes");
-
-                        Food food = new Food(recipeId, recipeName, recipeImage, recipeDescription, recipeTags.toString(), created, recipeDate, likes);
-                        recipeArrayList.add(food);
+                        FoodModel foodModel = new FoodModel(recipeId, recipeName, recipeImage, recipeDescription, recipeTags.toString(), created, recipeDate, likes);
+                        recipeArrayList.add(foodModel);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             } else {
                 Log.d("JSON_RESPONSE", "Empty page resource!");
             }

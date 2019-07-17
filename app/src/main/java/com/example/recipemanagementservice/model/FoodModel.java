@@ -1,9 +1,9 @@
-package com.example.recipemanagementservice;
+package com.example.recipemanagementservice.model;
 
 /**
  * Created by mustafatozluoglu on 14.06.2019
  */
-public class Food {
+public class FoodModel {
     private String foodId;
     private String foodName;
     private String foodImage;
@@ -13,11 +13,10 @@ public class Food {
     private String foodDate;
     private int likes;
 
-    public Food() {
-
+    public FoodModel() {
     }
 
-    public Food(String foodId, String foodName, String foodImage, String foodDescription, String foodTags, String foodCreated, String foodDate,int likes) {
+    public FoodModel(String foodId, String foodName, String foodImage, String foodDescription, String foodTags, String foodCreated, String foodDate, int likes) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.foodImage = foodImage;
@@ -94,7 +93,7 @@ public class Food {
 
     @Override
     public String toString() {
-        return "Food{" +
+        return "FoodModel{" +
                 "foodId='" + foodId + '\'' +
                 ", foodName='" + foodName + '\'' +
                 ", foodImage='" + foodImage + '\'' +

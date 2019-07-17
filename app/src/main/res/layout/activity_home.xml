@@ -10,29 +10,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="16dp"
         android:orientation="horizontal"
         android:weightSum="100">
 
         <Button
             android:id="@+id/bYeniYemekTarifi"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginRight="20dp"
-            android:backgroundTint="@color/blue"
+            android:layout_marginLeft="14dp"
+            android:backgroundTint="@color/red"
             android:background="@drawable/rounded_button"
-            android:text="  Yeni Yemek Tarifi   "
+            android:text="Yeni Yemek Tarifi"
             android:textColor="@color/cardview_light_background" />
 
         <Button
             android:id="@+id/bTariflerim"
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginRight="20dp"
-            android:backgroundTint="@color/blue"
+            android:layout_marginLeft="14dp"
+            android:backgroundTint="@color/red"
             android:background="@drawable/rounded_button"
             android:text="Tariflerim"
             android:textColor="@color/cardview_light_background" />
@@ -41,7 +38,7 @@
             android:id="@+id/bBildirim"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginLeft="6dp"
             android:backgroundTint="@color/amber"
             android:background="@drawable/ic_notifications" />
 
@@ -49,26 +46,25 @@
             android:id="@+id/bAyarlar"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="4dp"
-            android:backgroundTint="@color/red"
+            android:layout_marginLeft="6dp"
+            android:backgroundTint="@color/amber"
             android:background="@drawable/ic_settings" />
-
     </LinearLayout>
 
     <SearchView
         android:id="@+id/yemekArama"
         android:layout_width="385dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="14dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="4dp"
-        android:background="@color/colorWhite"></SearchView>
-
+        android:background="@color/colorWhite">
+    </SearchView>
 
     <TextView
         android:id="@+id/butunYemekTarifleri"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:text="Bütün Yemek Tarifleri"
         android:textColor="@color/amber"
@@ -78,5 +74,6 @@
     <ListView
         android:id="@+id/yemekListesi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content">
+    </ListView>
 </LinearLayout>

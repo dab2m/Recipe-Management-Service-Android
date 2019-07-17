@@ -1,4 +1,4 @@
-package com.example.recipemanagementservice;
+package com.example.recipemanagementservice.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,12 +13,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.recipemanagementservice.R;
+
 import java.io.ByteArrayOutputStream;
 
 /**
  * Created by Berk on 10.06.2019.
  */
-public class RecipeAdding extends AppCompatActivity implements View.OnClickListener {
+public class RecipeAddingActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText etYemekIsmi;
     ImageView imgYemekResmi;
@@ -63,10 +65,9 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
                 if (foodName.isEmpty() || foodDescription.isEmpty() || foodTags.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_LONG).show();
                 } else {
-                    //Food food = new Food(foodName, foodImage, foodDescription, foodTags);
+                    //FoodModel food = new FoodModel(foodName, foodImage, foodDescription, foodTags);
                     //DatabaseHelper db = new DatabaseHelper(getApplicationContext());
                     //db.insertFoodData(food);
-
                     Toast.makeText(getApplicationContext(), "Adding is successful", Toast.LENGTH_LONG).show();
                     etYemekIsmi.setText("");
                     imgYemekResmi.setImageResource(R.drawable.no);
@@ -98,6 +99,4 @@ public class RecipeAdding extends AppCompatActivity implements View.OnClickListe
             imgYemekResmi.setImageURI(imageUri);
         }
     }
-
-
 }
