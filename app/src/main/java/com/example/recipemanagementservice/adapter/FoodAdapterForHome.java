@@ -60,7 +60,6 @@ public class FoodAdapterForHome extends BaseAdapter {
         TextView recipeTags = (TextView) view.findViewById(R.id.yemekEtiketleri);
 
         recipeName.setText(recipeArrayList.get(i).getFoodName());
-        // TODO yemek resmi ayarlanacak
         recipeDecription.setText(recipeArrayList.get(i).getFoodDescription());
         recipeTags.setText(recipeArrayList.get(i).getFoodTags());
         return view;
