@@ -28,7 +28,6 @@ import java.util.ArrayList;
 public class MyRecipesActivity extends AppCompatActivity implements View.OnClickListener {
 
     ArrayList<FoodModel> recipeArrayList = new ArrayList<>();
-    LoginActivity login = new LoginActivity();
     JSONParser jsonParser;
     ProgressDialog progressDialog;
     FoodAdapterForMyRecipes foodAdapter;

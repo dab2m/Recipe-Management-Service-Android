@@ -138,7 +138,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         StringBuilder recipeTags = new StringBuilder();
                         for (int j = 0; j < recipeTagsArray.length(); j++)
                             recipeTags.append(recipeTagsArray.getString(j)).append(", ");
-                        recipeTags = new StringBuilder(recipeTags.substring(0, recipeTags.length() - 2));
+                        if (recipeTags.length() > 2)
+                            recipeTags = new StringBuilder(recipeTags.substring(0, recipeTags.length() - 2));
                         String created = recipe.getString("created");
                         String recipeDate = recipe.getString("recipeDate");
                         int likes = recipe.getInt("likes");
