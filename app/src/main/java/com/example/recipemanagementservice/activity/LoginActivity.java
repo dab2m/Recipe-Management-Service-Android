@@ -60,12 +60,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
-
-    public String getUsername(){
-        return user;
-    }
-
-    public void setUsername(String username){
-        this.user = username;
-    }
 }
