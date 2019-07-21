@@ -43,16 +43,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.bLogin:
                 user = etUsername.getText().toString();
                 pass = etPassword.getText().toString();
-
-                SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
-                prefs.edit().putString("username", user).apply(); // MyRecipesActivity sayfasina username'i gecirmek icin kullanildi.
-                ApiAuthenticationClient apiAuthenticationClient = new ApiAuthenticationClient(user, pass);
-                AsyncTask<Void, Void, String> execute = new ExecuteNetworkOperation(apiAuthenticationClient);
-                execute.execute();
-
-
                 etUsername.setText("");
                 etPassword.setText("");
+                if (user.isEmpty() || pass.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_LONG).show();
+                } else {
+                    SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
+                    prefs.edit().putString("username", user).apply(); // MyRecipesActivity sayfasina username'i gecirmek icin kullanildi.
+                    ApiAuthenticationClient apiAuthenticationClient = new ApiAuthenticationClient(user, pass);
+                    AsyncTask<Void, Void, String> execute = new ExecuteNetworkOperation(apiAuthenticationClient);
+                    execute.execute();
+                    etUsername.setText("");
+                    etPassword.setText("");
+                }
                 break;
             case R.id.bRegister:
                 startActivity(new Intent(this, RegisterActivity.class));
@@ -73,9 +76,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         private ApiAuthenticationClient apiAuthenticationClient;
         private String isValidCredentials;
 
-        /**
-         * Overload the constructor to pass objects to this class.
-         */
         public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
             this.apiAuthenticationClient = apiAuthenticationClient;
         }
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected String doInBackground(Void... params) {
             try {
-                isValidCredentials = apiAuthenticationClient.execute();
+                isValidCredentials = apiAuthenticationClient.executeForLogin();
             } catch (Exception e) {
                 e.printStackTrace();
             }

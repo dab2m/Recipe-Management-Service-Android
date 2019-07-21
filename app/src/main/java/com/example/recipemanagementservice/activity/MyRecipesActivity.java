@@ -88,7 +88,7 @@ public class MyRecipesActivity extends AppCompatActivity implements View.OnClick
                 e.printStackTrace();
             }
             Log.d("JSON_RESPONSE", jsonString);
-            if (jsonString != null) {
+            if (jsonString != null && !jsonString.contains("Could not fetch recipes")) {
                 try {
                     JSONObject jsonObject = new JSONObject(jsonString);
                     JSONArray recipes = jsonObject.getJSONArray("Recipes");
