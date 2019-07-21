@@ -34,7 +34,6 @@ public class MyRecipesActivity extends AppCompatActivity {
     private static String username;
     private static String myRecipesURL = "http://recipemanagementservice495.herokuapp.com/get.php?tariflerim=";
     ListView tariflerimYemekListesi;
-    Button bDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

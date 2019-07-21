@@ -37,7 +37,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     Button bTariflerim;
     Button bAyarlar;
     Button bBildirim;
-    Button bBegen;
     SearchView yemekArama; // TODO search ozelligi eklenecek
     ListView yemekListesi;
 
@@ -51,12 +50,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         bTariflerim = (Button) findViewById(R.id.bTariflerim);
         bAyarlar = (Button) findViewById(R.id.bAyarlar);
         bBildirim = (Button) findViewById(R.id.bBildirim);
-        bBegen = (Button) findViewById(R.id.bBegen);
         bYeniYemekTarifi.setOnClickListener(this);
         bTariflerim.setOnClickListener(this);
         bAyarlar.setOnClickListener(this);
         bBildirim.setOnClickListener(this);
-        //bBegen.setOnClickListener(this); //TODO begen butonuna null geliyor yorumdan cikarinca program patliyor.
     }
 
 
@@ -74,10 +71,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bBildirim:
                 startActivity(new Intent(this, MyNotificationActivity.class));
-                break;
-            case R.id.bBegen:
-                // TODO begenme islemi yapilacak
-                System.out.println("liked.");
                 break;
         }
     }
