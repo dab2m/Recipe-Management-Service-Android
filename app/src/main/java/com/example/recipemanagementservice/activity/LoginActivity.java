@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
                 prefs.edit().putString("username", user).apply(); // MyRecipesActivity sayfasina username'i gecirmek icin kullanildi.
-
                 ApiAuthenticationClient apiAuthenticationClient = new ApiAuthenticationClient(user, pass);
                 AsyncTask<Void, Void, String> execute = new ExecuteNetworkOperation(apiAuthenticationClient);
                 execute.execute();

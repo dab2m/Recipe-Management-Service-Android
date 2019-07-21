@@ -134,16 +134,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         String recipeName = recipe.getString("recipeName");
                         String recipeImage = recipe.getString("recipeImage");
                         String recipeDescription = recipe.getString("recipeDescription");
-                        JSONArray recipeTagsArray = recipe.getJSONArray("recipeTags");
-                        StringBuilder recipeTags = new StringBuilder();
-                        for (int j = 0; j < recipeTagsArray.length(); j++)
-                            recipeTags.append(recipeTagsArray.getString(j)).append(", ");
-                        if (recipeTags.length() > 2)
-                            recipeTags = new StringBuilder(recipeTags.substring(0, recipeTags.length() - 2));
+                        JSONArray foodTagsArray = recipe.getJSONArray("recipeTags");
+                        String[] recipeTags = new String[foodTagsArray.length()];
+                        for (int j = 0; j < recipeTags.length; j++)
+                            recipeTags[j] = foodTagsArray.getString(j);
+                            //recipeTags.append(recipeTagsArray.getString(j)).append(", ");
                         String created = recipe.getString("created");
                         String recipeDate = recipe.getString("recipeDate");
                         int likes = recipe.getInt("likes");
-                        FoodModel foodModel = new FoodModel(recipeId, recipeName, recipeImage, recipeDescription, recipeTags.toString(), created, recipeDate, likes);
+                        FoodModel foodModel = new FoodModel(recipeId, recipeName, recipeImage, recipeDescription, recipeTags, created, recipeDate, likes);
                         recipeArrayList.add(foodModel);
                     }
                 } catch (Exception e) {

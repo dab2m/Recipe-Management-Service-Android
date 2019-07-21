@@ -60,7 +60,7 @@ public class FoodHomeAdapter extends BaseAdapter {
         TextView recipeTags = (TextView) view.findViewById(R.id.yemekEtiketleri);
         recipeName.setText(recipeArrayList.get(i).getFoodName());
         recipeDecription.setText(recipeArrayList.get(i).getFoodDescription());
-        recipeTags.setText(recipeArrayList.get(i).getFoodTags());
+        recipeTags.setText(recipeArrayList.get(i).displayTags());
         return view;
     }
 

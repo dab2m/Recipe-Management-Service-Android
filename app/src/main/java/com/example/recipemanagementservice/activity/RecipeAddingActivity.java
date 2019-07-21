@@ -1,6 +1,7 @@
 package com.example.recipemanagementservice.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -40,10 +41,11 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
 
     private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/post.php";
 
-    String foodName;
-    String foodDescription;
-    String tags[];
-    String foodTags;
+    private String foodName;
+    private String foodDescription;
+    private String tagsTemp;
+    private String[] foodTags;
+    private static String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,8 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
         btnKaydet.setOnClickListener(this);
         btnIptalet.setOnClickListener(this);
         btnResimEkle.setOnClickListener(this);
+        SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE); // LoginActivity sayfasindan username'i almak icin kullanildi!
+        username = prefs.getString("username", "UNKNOWN");
     }
 
     @Override
@@ -72,13 +76,12 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
             case R.id.btnKaydet:
                 foodName = etYemekIsmi.getText().toString();
                 foodDescription = etYemekAciklamasi.getText().toString();
-                tags = new String[1];
-                foodTags = etYemekEtiketleri.getText().toString();
-                tags[0] = foodTags;
-                if (foodName.isEmpty() || foodDescription.isEmpty() || foodTags.isEmpty()) {
+                tagsTemp = etYemekEtiketleri.getText().toString();
+                if (foodName.isEmpty() || foodDescription.isEmpty() || tagsTemp.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Adding is successful", Toast.LENGTH_LONG).show();
+                    foodTags=tagsTemp.split(" ");
                     etYemekIsmi.setText("");
                     imgYemekResmi.setImageResource(R.drawable.no);
                     etYemekAciklamasi.setText("");
@@ -124,8 +127,8 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
                     JSONObject jsonParam = new JSONObject();
                     jsonParam.put("tarif", foodName);
                     jsonParam.put("aciklama", foodDescription);
-                    jsonParam.put("tags", "[orange, yellow]");
-                    jsonParam.put("username", "BERK");
+                    jsonParam.put("tags", foodTags);
+                    jsonParam.put("username", username);
                     Log.i("JSON", jsonParam.toString());
                     OutputStream os = conn.getOutputStream();
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));

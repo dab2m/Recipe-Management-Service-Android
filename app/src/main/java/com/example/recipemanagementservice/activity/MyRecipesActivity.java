@@ -99,14 +99,13 @@ public class MyRecipesActivity extends AppCompatActivity implements View.OnClick
                         String foodImage = recipe.getString("recipeImage");
                         String foodDescription = recipe.getString("recipeDescription");
                         JSONArray foodTagsArray = recipe.getJSONArray("recipeTags");
-                        StringBuilder foodTags = new StringBuilder();
-                        for (int j = 0; j < foodTagsArray.length(); j++)
-                            foodTags.append(foodTagsArray.getString(j)).append(", ");
-                        foodTags = new StringBuilder(foodTags.substring(0, foodTags.length() - 2));
+                        String[] foodTags = new String[foodTagsArray.length()];
+                        for (int j = 0; j < foodTags.length; j++)
+                            foodTags[j] = foodTagsArray.getString(j);
                         String foodCreated = recipe.getString("created");
                         String foodDate = recipe.getString("recipeDate");
                         int foodLikes = recipe.getInt("likes");
-                        FoodModel foodModel = new FoodModel(foodId, foodName, foodImage, foodDescription, foodTags.toString(), foodCreated, foodDate, foodLikes);
+                        FoodModel foodModel = new FoodModel(foodId, foodName, foodImage, foodDescription, foodTags, foodCreated, foodDate, foodLikes);
                         recipeArrayList.add(foodModel);
                     }
                 } catch (Exception e) {

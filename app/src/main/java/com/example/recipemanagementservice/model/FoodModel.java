@@ -8,7 +8,7 @@ public class FoodModel {
     private String foodName;
     private String foodImage;
     private String foodDescription;
-    private String foodTags;
+    private String[] foodTags;
     private String foodCreated;
     private String foodDate;
     private int foodLikes;
@@ -16,7 +16,7 @@ public class FoodModel {
     public FoodModel() {
     }
 
-    public FoodModel(String foodId, String foodName, String foodImage, String foodDescription, String foodTags, String foodCreated, String foodDate, int foodLikes) {
+    public FoodModel(String foodId, String foodName, String foodImage, String foodDescription, String[] foodTags, String foodCreated, String foodDate, int foodLikes) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.foodImage = foodImage;
@@ -59,11 +59,11 @@ public class FoodModel {
         this.foodDescription = foodDescription;
     }
 
-    public String getFoodTags() {
+    public String[] getFoodTags() {
         return foodTags;
     }
 
-    public void setFoodTags(String foodTags) {
+    public void setFoodTags(String[] foodTags) {
         this.foodTags = foodTags;
     }
 
@@ -102,5 +102,12 @@ public class FoodModel {
                 ", foodCreated='" + foodCreated + '\'' +
                 ", foodDate='" + foodDate + '\'' +
                 '}';
+    }
+
+    public String displayTags(){
+        String showTags="";
+        for(int i=0;i<foodTags.length;i++)
+            showTags += foodTags[i] + " ";
+        return showTags;
     }
 }

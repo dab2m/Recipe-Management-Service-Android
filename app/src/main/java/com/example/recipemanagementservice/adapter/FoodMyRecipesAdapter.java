@@ -63,7 +63,7 @@ public class FoodMyRecipesAdapter extends BaseAdapter {
         TextView recipeTags = (TextView) view.findViewById(R.id.tvYemekEtiketleri);
         recipeName.setText(recipeArrayList.get(i).getFoodName());
         recipeDecription.setText(recipeArrayList.get(i).getFoodDescription());
-        recipeTags.setText(recipeArrayList.get(i).getFoodTags());
+        recipeTags.setText(recipeArrayList.get(i).displayTags());
         return view;
     }
 
