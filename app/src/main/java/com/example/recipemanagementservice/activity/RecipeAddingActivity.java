@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.recipemanagementservice.R;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedWriter;
@@ -24,6 +25,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Arrays;
 
 /**
  * Created by Berk on 10.06.2019.
@@ -124,9 +126,10 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
                     conn.setDoInput(true);
                     conn.connect();
                     JSONObject jsonParam = new JSONObject();
+                    JSONArray tagsArray = new JSONArray(Arrays.asList(foodTags));
                     jsonParam.put("tarif", foodName);
                     jsonParam.put("aciklama", foodDescription);
-                    jsonParam.put("tags", foodTags);
+                    jsonParam.put("tags", tagsArray);
                     jsonParam.put("username", username);
                     Log.i("JSON", jsonParam.toString());
                     OutputStream os = conn.getOutputStream();
