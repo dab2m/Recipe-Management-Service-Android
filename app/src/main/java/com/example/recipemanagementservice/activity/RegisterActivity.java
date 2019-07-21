@@ -1,14 +1,14 @@
 package com.example.recipemanagementservice.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.recipemanagementservice.R;
-import com.example.recipemanagementservice.database.DatabaseHelper;
 import com.example.recipemanagementservice.model.UserModel;
 
 /**
@@ -40,18 +40,55 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_LONG).show();
                 } else {
                     UserModel user = new UserModel(username, password);
-                    DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-                    if (db.searchPass(username) == null) {
-                        db.insertUserData(user);
-                        etUsername.setText("");
-                        etPassword.setText("");
-                        Toast.makeText(getApplicationContext(), "RegisterActivity is successful", Toast.LENGTH_LONG).show();
-                    } else {
-                        etPassword.setText("");
-                        Toast.makeText(getApplicationContext(), "Username must be unique!", Toast.LENGTH_LONG).show();
-                    }
+
+                    ApiAuthenticationClient apiAuthenticationClient = new ApiAuthenticationClient(username, password);
+                    AsyncTask<Void, Void, String> execute = new ExecuteNetworkOperation(apiAuthenticationClient);
+                    execute.execute();
                 }
                 break;
+        }
+    }
+
+    protected class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
+
+        private ApiAuthenticationClient apiAuthenticationClient;
+        private String isValidCredentials;
+
+        public ExecuteNetworkOperation(ApiAuthenticationClient apiAuthenticationClient) {
+            this.apiAuthenticationClient = apiAuthenticationClient;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                isValidCredentials = apiAuthenticationClient.executeForRegister();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            // Register Success
+            if (isValidCredentials.contains("Success")) {
+                Toast.makeText(getApplicationContext(), "Register is succesful", Toast.LENGTH_LONG).show();
+                etUsername.setText("");
+                etPassword.setText("");
+            }
+            // Register Failure
+            else {
+                Toast.makeText(getApplicationContext(), "Register Failed", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
