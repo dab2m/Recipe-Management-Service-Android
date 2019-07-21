@@ -88,7 +88,7 @@ public class MyRecipesActivity extends AppCompatActivity implements View.OnClick
                 e.printStackTrace();
             }
             Log.d("JSON_RESPONSE", jsonString);
-            if (jsonString != null) {
+            if (jsonString != null && !jsonString.contains("Could not fetch recipes")) {
                 try {
                     JSONObject jsonObject = new JSONObject(jsonString);
                     JSONArray recipes = jsonObject.getJSONArray("Recipes");
@@ -102,6 +102,8 @@ public class MyRecipesActivity extends AppCompatActivity implements View.OnClick
                         StringBuilder foodTags = new StringBuilder();
                         for (int j = 0; j < foodTagsArray.length(); j++)
                             foodTags.append(foodTagsArray.getString(j)).append(", ");
+                        if (foodTags.length() > 2)
+                            foodTags = new StringBuilder(foodTags.substring(0, foodTags.length() - 2));
                         foodTags = new StringBuilder(foodTags.substring(0, foodTags.length() - 2));
                         String foodCreated = recipe.getString("created");
                         String foodDate = recipe.getString("recipeDate");
