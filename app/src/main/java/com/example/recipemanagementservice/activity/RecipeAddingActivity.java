@@ -16,7 +16,10 @@ import com.example.recipemanagementservice.R;
 
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -35,7 +38,7 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
     Button btnResimEkle;
     Uri imageUri;
 
-    private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/post.php?list";
+    private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/post.php";
 
     String foodName;
     String foodDescription;
@@ -113,23 +116,25 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
                     URL url = new URL(requestUrl);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                    conn.setRequestProperty("Accept","application/json");
+                    //conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                    //conn.setRequestProperty("Accept","application/json");
                     conn.setDoOutput(true);
                     conn.setDoInput(true);
+                    conn.connect();
                     JSONObject jsonParam = new JSONObject();
-                    jsonParam.put("recipeName", foodName);
-                    jsonParam.put("recipeDescription", foodDescription);
-                    jsonParam.put("recipeTags", tags);
-                    jsonParam.put("created", "BERK");
+                    jsonParam.put("tarif", foodName);
+                    jsonParam.put("aciklama", foodDescription);
+                    jsonParam.put("tags", "[orange, yellow]");
+                    jsonParam.put("username", "BERK");
                     Log.i("JSON", jsonParam.toString());
-                    DataOutputStream  os = new DataOutputStream (conn.getOutputStream());
-                    os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
-                    os.flush();
+                    OutputStream os = conn.getOutputStream();
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                    writer.write(jsonParam.toString());
+                    writer.flush();
+                    writer.close();
                     os.close();
                     Log.i("STATUS", String.valueOf(conn.getResponseCode()));
                     Log.i("MSG", conn.getResponseMessage());
-                    conn.disconnect();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
