@@ -52,14 +52,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 execute.execute();
 
 
-                /*if (pass.equals(password)) {
-
-                    startActivity(new Intent(this, HomeActivity.class));
-                } else {
-                    Toast.makeText(getApplicationContext(), "Username and Password do not match!", Toast.LENGTH_LONG).show();
-                }*/
-
-
                 etUsername.setText("");
                 etPassword.setText("");
                 break;
@@ -130,6 +122,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         intent.putExtras(bundle);
         startActivity(intent);
     }
-
-
 }

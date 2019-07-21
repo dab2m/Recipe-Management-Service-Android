@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.example.recipemanagementservice.R;
-import com.example.recipemanagementservice.adapter.FoodAdapterForHome;
+import com.example.recipemanagementservice.adapter.FoodHomeAdapter;
 import com.example.recipemanagementservice.model.FoodModel;
 import com.example.recipemanagementservice.network.JSONParser;
 
@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     JSONParser jsonParser;
     ProgressDialog progressDialog;
-    FoodAdapterForHome foodAdapter;
+    FoodHomeAdapter foodAdapter;
 
     private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/get.php?list";
 
@@ -107,7 +107,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            foodAdapter = new FoodAdapterForHome(HomeActivity.this, recipeArrayList);
+            foodAdapter = new FoodHomeAdapter(HomeActivity.this, recipeArrayList);
             if (progressDialog.isShowing()) {
                 yemekListesi.setAdapter(foodAdapter);
                 progressDialog.dismiss();

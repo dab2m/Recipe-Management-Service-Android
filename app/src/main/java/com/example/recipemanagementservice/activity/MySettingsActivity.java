@@ -16,7 +16,7 @@ public class MySettingsActivity extends AppCompatActivity {
 
     Button btOnayla;
     EditText et_n_gun;
-    int n_gun = 0;
+    private int n_gun = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +33,5 @@ public class MySettingsActivity extends AppCompatActivity {
                     n_gun = Integer.parseInt(String.valueOf(et_n_gun.getText()));
             }
         });
-    }
-
-    public int getN_gun() {
-        return n_gun;
     }
 }

@@ -11,12 +11,12 @@ public class FoodModel {
     private String foodTags;
     private String foodCreated;
     private String foodDate;
-    private int likes;
+    private int foodLikes;
 
     public FoodModel() {
     }
 
-    public FoodModel(String foodId, String foodName, String foodImage, String foodDescription, String foodTags, String foodCreated, String foodDate, int likes) {
+    public FoodModel(String foodId, String foodName, String foodImage, String foodDescription, String foodTags, String foodCreated, String foodDate, int foodLikes) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.foodImage = foodImage;
@@ -24,7 +24,7 @@ public class FoodModel {
         this.foodTags = foodTags;
         this.foodCreated = foodCreated;
         this.foodDate = foodDate;
-        this.likes = likes;
+        this.foodLikes = foodLikes;
     }
 
     public String getFoodId() {
@@ -83,12 +83,12 @@ public class FoodModel {
         this.foodDate = foodDate;
     }
 
-    public int getLikes() {
-        return likes;
+    public int getFoodLikes() {
+        return foodLikes;
     }
 
-    public void setLikes(int likes) {
-        this.likes = likes;
+    public void setFoodLikes(int foodLikes) {
+        this.foodLikes = foodLikes;
     }
 
     @Override

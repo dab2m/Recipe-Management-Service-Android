@@ -23,16 +23,19 @@ import java.util.ArrayList;
 /**
  * Created by mustafatozluoglu on 11.07.2019
  */
-public class FoodAdapterForHome extends BaseAdapter {
+public class FoodMyRecipesAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<FoodModel> recipeArrayList;
     LayoutInflater layoutInflater;
 
-    public FoodAdapterForHome(Activity activity, ArrayList<FoodModel> recipeArrayList){
+    public FoodMyRecipesAdapter(Activity activity, ArrayList<FoodModel> recipeArrayList){
         this.context = activity;
         this.recipeArrayList = recipeArrayList;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public FoodMyRecipesAdapter() {
     }
 
     @Override
@@ -52,20 +55,19 @@ public class FoodAdapterForHome extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
-        View view = layoutInflater.inflate(R.layout.item_recipe_without_delete, null);
-        TextView recipeName = (TextView) view.findViewById(R.id.yemekIsmi);
-        ImageView recipeImage = (ImageView) view.findViewById(R.id.yemekResmi);
+        View view = layoutInflater.inflate(R.layout.item_recipe_with_delete, null);
+        TextView recipeName = (TextView) view.findViewById(R.id.tvYemekIsmi);
+        ImageView recipeImage = (ImageView) view.findViewById(R.id.ivYemekResmi);
         new DownLoadImageTask(recipeImage).execute(recipeArrayList.get(i).getFoodImage());
-        TextView recipeDecription = (TextView) view.findViewById(R.id.yemekAciklamasi);
-        TextView recipeTags = (TextView) view.findViewById(R.id.yemekEtiketleri);
-
+        TextView recipeDecription = (TextView) view.findViewById(R.id.tvYemekAciklamasi);
+        TextView recipeTags = (TextView) view.findViewById(R.id.tvYemekEtiketleri);
         recipeName.setText(recipeArrayList.get(i).getFoodName());
         recipeDecription.setText(recipeArrayList.get(i).getFoodDescription());
         recipeTags.setText(recipeArrayList.get(i).getFoodTags());
         return view;
     }
 
-    private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
+    private class DownLoadImageTask extends AsyncTask<String,Void, Bitmap> {
         ImageView imageView;
 
         public DownLoadImageTask(ImageView imageView){
