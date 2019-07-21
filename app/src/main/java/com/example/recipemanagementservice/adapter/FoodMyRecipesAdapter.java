@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,11 +24,12 @@ import java.util.ArrayList;
 /**
  * Created by mustafatozluoglu on 11.07.2019
  */
-public class FoodMyRecipesAdapter extends BaseAdapter {
+public class FoodMyRecipesAdapter extends BaseAdapter implements View.OnClickListener {
 
     Context context;
     ArrayList<FoodModel> recipeArrayList;
     LayoutInflater layoutInflater;
+    Button bDelete;
 
     public FoodMyRecipesAdapter(Activity activity, ArrayList<FoodModel> recipeArrayList){
         this.context = activity;
@@ -61,10 +63,16 @@ public class FoodMyRecipesAdapter extends BaseAdapter {
         new DownLoadImageTask(recipeImage).execute(recipeArrayList.get(i).getFoodImage());
         TextView recipeDecription = (TextView) view.findViewById(R.id.tvYemekAciklamasi);
         TextView recipeTags = (TextView) view.findViewById(R.id.tvYemekEtiketleri);
+        bDelete = (Button) view.findViewById(R.id.bDelete);
+        bDelete.setOnClickListener(this);
         recipeName.setText(recipeArrayList.get(i).getFoodName());
         recipeDecription.setText(recipeArrayList.get(i).getFoodDescription());
         recipeTags.setText(recipeArrayList.get(i).displayTags());
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
     }
 
     private class DownLoadImageTask extends AsyncTask<String,Void, Bitmap> {

@@ -88,6 +88,7 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
                     etYemekEtiketleri.setText("");
                     try{
                         sendPost(homepageURL);
+                        startActivity(new Intent(this, HomeActivity.class));
                     }
                     catch (Exception e){
                         e.printStackTrace();
@@ -119,8 +120,6 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
                     URL url = new URL(requestUrl);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
-                    //conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                    //conn.setRequestProperty("Accept","application/json");
                     conn.setDoOutput(true);
                     conn.setDoInput(true);
                     conn.connect();

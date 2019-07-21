@@ -59,6 +59,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         //bBegen.setOnClickListener(this); //TODO begen butonuna null geliyor yorumdan cikarinca program patliyor.
     }
 
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

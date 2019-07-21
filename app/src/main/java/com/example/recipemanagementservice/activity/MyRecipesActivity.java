@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * Created by mustafatozluoglu on 06.07.2019
  */
 
-public class MyRecipesActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyRecipesActivity extends AppCompatActivity {
 
     ArrayList<FoodModel> recipeArrayList = new ArrayList<>();
     JSONParser jsonParser;
@@ -40,21 +40,10 @@ public class MyRecipesActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_recipes);
-        bDelete = (Button) findViewById(R.id.bDelete);
         tariflerimYemekListesi = (ListView) findViewById(R.id.tariflerimYemekListesi);
-        //bDelete.setOnClickListener(this);
         SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE); // LoginActivity sayfasindan username'i almak icin kullanildi!
         username = prefs.getString("username", "UNKNOWN");
         new getRecipe().execute();
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.bDelete:
-                recipeArrayList.remove(0); // TODO remove islemi yapilacak deneme icin 0 verdim
-                break;
-        }
     }
 
     private class getRecipe extends AsyncTask<Void, Void, Void> {
