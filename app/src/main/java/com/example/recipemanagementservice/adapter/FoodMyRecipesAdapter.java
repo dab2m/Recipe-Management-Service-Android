@@ -6,9 +6,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,27 +19,32 @@ import android.widget.TextView;
 import com.example.recipemanagementservice.R;
 import com.example.recipemanagementservice.model.FoodModel;
 
+import org.json.JSONObject;
+
+import java.io.BufferedWriter;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
 /**
  * Created by mustafatozluoglu on 11.07.2019
  */
-public class FoodMyRecipesAdapter extends BaseAdapter implements View.OnClickListener {
+public class FoodMyRecipesAdapter extends ArrayAdapter implements View.OnClickListener {
 
     Context context;
     ArrayList<FoodModel> recipeArrayList;
     LayoutInflater layoutInflater;
+    String recipeId;
     Button bDelete;
 
     public FoodMyRecipesAdapter(Activity activity, ArrayList<FoodModel> recipeArrayList){
+        super(activity,0,recipeArrayList);
         this.context = activity;
         this.recipeArrayList = recipeArrayList;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-    }
-
-    public FoodMyRecipesAdapter() {
     }
 
     @Override
@@ -64,6 +71,7 @@ public class FoodMyRecipesAdapter extends BaseAdapter implements View.OnClickLis
         TextView recipeDecription = (TextView) view.findViewById(R.id.tvYemekAciklamasi);
         TextView recipeTags = (TextView) view.findViewById(R.id.tvYemekEtiketleri);
         bDelete = (Button) view.findViewById(R.id.bDelete);
+        recipeId = recipeArrayList.get(i).getFoodId();
         bDelete.setOnClickListener(this);
         recipeName.setText(recipeArrayList.get(i).getFoodName());
         recipeDecription.setText(recipeArrayList.get(i).getFoodDescription());
@@ -73,6 +81,7 @@ public class FoodMyRecipesAdapter extends BaseAdapter implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        deletePost(recipeId,"a");
     }
 
     private class DownLoadImageTask extends AsyncTask<String,Void, Bitmap> {
@@ -102,5 +111,37 @@ public class FoodMyRecipesAdapter extends BaseAdapter implements View.OnClickLis
         protected void onPostExecute(Bitmap result){
             imageView.setImageBitmap(result);
         }
+    }
+
+    public void deletePost(final String recipeId, final String password) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://recipemanagementservice495.herokuapp.com/post.php");
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.connect();
+                    JSONObject jsonParam = new JSONObject();
+                    jsonParam.put("delete", recipeId);
+                    jsonParam.put("password", password);
+
+                    Log.i("JSON", jsonParam.toString());
+                    OutputStream os = conn.getOutputStream();
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                    writer.write(jsonParam.toString());
+                    writer.flush();
+                    writer.close();
+                    os.close();
+                    Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                    Log.i("MSG", conn.getResponseMessage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
     }
 }
