@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="741dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -15,37 +15,37 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/food_name"
             android:textSize="24dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/ivYemekResmi"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_gravity="center"
-            android:src="@drawable/no" />
+            android:src="@drawable/no"/>
 
         <TextView
             android:id="@+id/tvYemekAciklamasi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/food_description"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:text="@string/food_description"/>
 
         <TextView
             android:id="@+id/tvYemekEtiketleri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/food_tags"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:text="@string/food_tags"/>
 
         <Button
             android:id="@+id/bDelete"
             android:layout_width="50dp"
+            android:background="@drawable/ic_delete"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@drawable/ic_delete"
-            android:backgroundTint="@color/red" />
+            android:backgroundTint="@color/red"/>
     </LinearLayout>
 </LinearLayout>

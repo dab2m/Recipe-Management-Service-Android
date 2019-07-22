@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,19 +34,21 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * Created by mustafatozluoglu on 11.07.2019
  */
-public class FoodMyRecipesAdapter extends ArrayAdapter implements View.OnClickListener {
+public class FoodMyRecipesAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<FoodModel> recipeArrayList;
     LayoutInflater layoutInflater;
-    String recipeId;
     Button bDelete;
+    private String recipeId;
 
     public FoodMyRecipesAdapter(Activity activity, ArrayList<FoodModel> recipeArrayList){
-        super(activity,0,recipeArrayList);
         this.context = activity;
         this.recipeArrayList = recipeArrayList;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public FoodMyRecipesAdapter() {
     }
 
     @Override
@@ -66,7 +67,7 @@ public class FoodMyRecipesAdapter extends ArrayAdapter implements View.OnClickLi
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup parent) {
+    public View getView(final int i, View convertView, ViewGroup parent) {
         View view = layoutInflater.inflate(R.layout.item_recipe_with_delete, null);
         TextView recipeName = (TextView) view.findViewById(R.id.tvYemekIsmi);
         ImageView recipeImage = (ImageView) view.findViewById(R.id.ivYemekResmi);
@@ -74,19 +75,20 @@ public class FoodMyRecipesAdapter extends ArrayAdapter implements View.OnClickLi
         TextView recipeDecription = (TextView) view.findViewById(R.id.tvYemekAciklamasi);
         TextView recipeTags = (TextView) view.findViewById(R.id.tvYemekEtiketleri);
         bDelete = (Button) view.findViewById(R.id.bDelete);
-        recipeId = recipeArrayList.get(i).getFoodId();
-        bDelete.setOnClickListener(this);
+        bDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(recipeArrayList.get(i).getFoodId());
+                recipeId = recipeArrayList.get(i).getFoodId();
+                SharedPreferences prefs = context.getSharedPreferences("MyApp", MODE_PRIVATE); // LoginActivity sayfasindan username'i almak icin kullanildi!
+                String username = prefs.getString("username", "UNKNOWN");
+                deletePost(recipeId, username);
+            }
+        });
         recipeName.setText(recipeArrayList.get(i).getFoodName());
         recipeDecription.setText(recipeArrayList.get(i).getFoodDescription());
         recipeTags.setText(recipeArrayList.get(i).displayTags());
         return view;
-    }
-
-    @Override
-    public void onClick(View v) {
-        SharedPreferences prefs = context.getSharedPreferences("MyApp", MODE_PRIVATE); // LoginActivity sayfasindan password'u almak icin kullanildi!
-        String password = prefs.getString("password", "UNKNOWN");
-        deletePost(recipeId,password);
     }
 
     private class DownLoadImageTask extends AsyncTask<String,Void, Bitmap> {
@@ -118,7 +120,7 @@ public class FoodMyRecipesAdapter extends ArrayAdapter implements View.OnClickLi
         }
     }
 
-    public void deletePost(final String recipeId, final String password) {
+    public void deletePost(final String recipeId, final String username) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -131,8 +133,7 @@ public class FoodMyRecipesAdapter extends ArrayAdapter implements View.OnClickLi
                     conn.connect();
                     JSONObject jsonParam = new JSONObject();
                     jsonParam.put("delete", recipeId);
-                    jsonParam.put("password", password);
-
+                    jsonParam.put("password", "a");
                     Log.i("JSON", jsonParam.toString());
                     OutputStream os = conn.getOutputStream();
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
