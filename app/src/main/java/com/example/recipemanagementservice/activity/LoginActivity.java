@@ -50,6 +50,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 } else {
                     SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
                     prefs.edit().putString("username", user).apply(); // MyRecipesActivity sayfasina username'i gecirmek icin kullanildi.
+
+                    SharedPreferences prefs2 = getSharedPreferences("MyApp", MODE_PRIVATE);
+                    prefs2.edit().putString("password", pass).apply(); // FoodMyRecipesAdapter sayfasina password'i gecirmek icin kullanildi.
+
                     ApiAuthenticationClient apiAuthenticationClient = new ApiAuthenticationClient(user, pass);
                     AsyncTask<Void, Void, String> execute = new ExecuteNetworkOperation(apiAuthenticationClient);
                     execute.execute();

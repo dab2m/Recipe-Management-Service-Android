@@ -3,6 +3,7 @@ package com.example.recipemanagementservice.adapter;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -28,6 +29,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by mustafatozluoglu on 11.07.2019
@@ -81,7 +84,9 @@ public class FoodMyRecipesAdapter extends ArrayAdapter implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        deletePost(recipeId,"a");
+        SharedPreferences prefs = context.getSharedPreferences("MyApp", MODE_PRIVATE); // LoginActivity sayfasindan password'u almak icin kullanildi!
+        String password = prefs.getString("password", "UNKNOWN");
+        deletePost(recipeId,password);
     }
 
     private class DownLoadImageTask extends AsyncTask<String,Void, Bitmap> {
