@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.recipemanagementservice.R;
-import com.example.recipemanagementservice.model.UserModel;
+import com.example.recipemanagementservice.network.ApiAuthenticationClient;
 
 /**
  * Created by mustafatozluoglu on 5.06.2019
@@ -39,8 +39,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fill All Fields", Toast.LENGTH_LONG).show();
                 } else {
-                    UserModel user = new UserModel(username, password);
-
                     ApiAuthenticationClient apiAuthenticationClient = new ApiAuthenticationClient(username, password);
                     AsyncTask<Void, Void, String> execute = new ExecuteNetworkOperation(apiAuthenticationClient);
                     execute.execute();
@@ -61,7 +59,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         @Override
@@ -71,23 +68,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return null;
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
             // Register Success
             if (isValidCredentials.contains("Success")) {
-                Toast.makeText(getApplicationContext(), "Register is succesful", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Register Is Successful", Toast.LENGTH_LONG).show();
                 etUsername.setText("");
                 etPassword.setText("");
             }
             // Register Failure
             else {
-                Toast.makeText(getApplicationContext(), "Register Failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Register Is Failed", Toast.LENGTH_LONG).show();
             }
         }
     }

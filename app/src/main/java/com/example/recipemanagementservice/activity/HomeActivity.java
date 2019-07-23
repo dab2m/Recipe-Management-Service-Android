@@ -70,7 +70,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, MySettingsActivity.class));
                 break;
             case R.id.bBildirim:
-                startActivity(new Intent(this, MyNotificationActivity.class));
                 break;
         }
     }

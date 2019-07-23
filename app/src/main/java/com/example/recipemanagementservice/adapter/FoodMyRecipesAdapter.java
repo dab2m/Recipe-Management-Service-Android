@@ -78,7 +78,6 @@ public class FoodMyRecipesAdapter extends BaseAdapter {
         bDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(recipeArrayList.get(i).getFoodId());
                 recipeId = recipeArrayList.get(i).getFoodId();
                 SharedPreferences prefs = context.getSharedPreferences("MyApp", MODE_PRIVATE); // LoginActivity sayfasindan username'i almak icin kullanildi!
                 String username = prefs.getString("username", "UNKNOWN");
@@ -133,7 +132,7 @@ public class FoodMyRecipesAdapter extends BaseAdapter {
                     conn.connect();
                     JSONObject jsonParam = new JSONObject();
                     jsonParam.put("delete", recipeId);
-                    jsonParam.put("password", "a");
+                    jsonParam.put("password", username);
                     Log.i("JSON", jsonParam.toString());
                     OutputStream os = conn.getOutputStream();
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));

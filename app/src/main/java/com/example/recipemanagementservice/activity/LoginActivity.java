@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.recipemanagementservice.R;
+import com.example.recipemanagementservice.network.ApiAuthenticationClient;
 
 /**
  * Created by mustafatozluoglu on 5.06.2019
@@ -28,7 +29,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
@@ -63,14 +63,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public String getUsername() {
-        return user;
-    }
-
-    public void setUsername(String username) {
-        this.user = username;
-    }
-
     protected class ExecuteNetworkOperation extends AsyncTask<Void, Void, String> {
 
         private ApiAuthenticationClient apiAuthenticationClient;
@@ -83,7 +75,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         @Override
@@ -93,21 +84,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return null;
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
             // Login Success
             if (isValidCredentials.contains("Success")) {
                 goToHomeActivity();
             }
             // Login Failure
             else {
-                Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Login Is Failed", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -116,7 +105,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Bundle bundle = new Bundle();
         bundle.putString("username", user);
         bundle.putString("password", pass);
-
         Intent intent = new Intent(this, HomeActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);

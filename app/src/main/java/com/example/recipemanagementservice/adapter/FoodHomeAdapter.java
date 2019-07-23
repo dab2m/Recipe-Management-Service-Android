@@ -24,7 +24,7 @@ import java.util.ArrayList;
 /**
  * Created by Berk on 16.06.2019.
  */
-public class FoodHomeAdapter extends BaseAdapter implements View.OnClickListener {
+public class FoodHomeAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<FoodModel> recipeArrayList;
@@ -61,15 +61,10 @@ public class FoodHomeAdapter extends BaseAdapter implements View.OnClickListener
         TextView recipeDecription = (TextView) view.findViewById(R.id.yemekAciklamasi);
         TextView recipeTags = (TextView) view.findViewById(R.id.yemekEtiketleri);
         bLike = (Button) view.findViewById(R.id.bBegen);
-        bLike.setOnClickListener(this);
         recipeName.setText(recipeArrayList.get(i).getFoodName());
         recipeDecription.setText(recipeArrayList.get(i).getFoodDescription());
         recipeTags.setText(recipeArrayList.get(i).displayTags());
         return view;
-    }
-
-    @Override
-    public void onClick(View v) {
     }
 
     private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
