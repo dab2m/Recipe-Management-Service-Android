@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -41,6 +42,7 @@ public class FoodHomeAdapter extends BaseAdapter {
     LayoutInflater layoutInflater;
     Button bLike;
     private String recipeId;
+    ArrayList<String> list = new ArrayList<>();
 
     public FoodHomeAdapter(Activity activity, ArrayList<FoodModel> recipeArrayList){
         this.context = activity;
@@ -80,8 +82,16 @@ public class FoodHomeAdapter extends BaseAdapter {
                 recipeId = recipeArrayList.get(position).getFoodId();
                 SharedPreferences prefs = context.getSharedPreferences("MyApp", MODE_PRIVATE); // LoginActivity sayfasindan username'i almak icin kullanildi!
                 String username = prefs.getString("username", "UNKNOWN");
-                likePost(recipeId, username);
-
+                if (list.isEmpty()) {
+                    list.add(recipeId);
+                    likePost(recipeId, username);
+                }
+                else {
+                    if(!list.contains(recipeId)) {
+                        list.add(recipeId);
+                        likePost(recipeId, username);
+                    }
+                }
             }
         });
         recipeName.setText(recipeArrayList.get(position).getFoodName());

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "363743013122",
+    "firebase_url": "https://bil495-dab2mm.firebaseio.com",
+    "project_id": "bil495-dab2mm",
+    "storage_bucket": "bil495-dab2mm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363743013122:android:ab690df6b75dbc7c",
+        "android_client_info": {
+          "package_name": "com.example.recipemanagementservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363743013122-g5ni5kjl7oiekisk5vttelh11sdo4kf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7V4rKE0Z6fF-9v81NnhTVYjKmF0lWftk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363743013122-g5ni5kjl7oiekisk5vttelh11sdo4kf4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
