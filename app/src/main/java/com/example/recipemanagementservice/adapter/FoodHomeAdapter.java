@@ -43,27 +43,27 @@ public class FoodHomeAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return recipeArrayList.get(i);
+    public Object getItem(int position) {
+        return recipeArrayList.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         View view = layoutInflater.inflate(R.layout.item_recipe_without_delete, null);
         TextView recipeName = (TextView) view.findViewById(R.id.yemekIsmi);
         ImageView recipeImage = (ImageView) view.findViewById(R.id.yemekResmi);
-        new DownLoadImageTask(recipeImage).execute(recipeArrayList.get(i).getFoodImage());
+        new DownLoadImageTask(recipeImage).execute(recipeArrayList.get(position).getFoodImage());
         TextView recipeDecription = (TextView) view.findViewById(R.id.yemekAciklamasi);
         TextView recipeTags = (TextView) view.findViewById(R.id.yemekEtiketleri);
         bLike = (Button) view.findViewById(R.id.bBegen);
-        recipeName.setText(recipeArrayList.get(i).getFoodName());
-        recipeDecription.setText(recipeArrayList.get(i).getFoodDescription());
-        recipeTags.setText(recipeArrayList.get(i).displayTags());
+        recipeName.setText(recipeArrayList.get(position).getFoodName());
+        recipeDecription.setText(recipeArrayList.get(position).getFoodDescription());
+        recipeTags.setText(recipeArrayList.get(position).displayTags());
         return view;
     }
 

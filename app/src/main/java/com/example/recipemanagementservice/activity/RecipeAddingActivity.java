@@ -42,6 +42,7 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
     private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/post.php";
 
     private String foodName;
+    private ImageView foodImage;
     private String foodDescription;
     private String tagsTemp;
     private String[] foodTags;
@@ -55,7 +56,7 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
         etYemekAciklamasi = (EditText) findViewById(R.id.etyemekAciklamasi);
         etYemekEtiketleri = (EditText) findViewById(R.id.etyemekEtiketleri);
         imgYemekResmi = (ImageView) findViewById(R.id.imgYemekResmi);
-        imgYemekResmi.setImageResource(R.drawable.no);
+        foodImage = imgYemekResmi;
         btnKaydet = (Button) findViewById(R.id.btnKaydet);
         btnIptalet = (Button) findViewById(R.id.btnIptalEt);
         btnResimEkle = (Button) findViewById(R.id.btnResimEkle);
@@ -88,6 +89,7 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
                     etYemekEtiketleri.setText("");
                     try{
                         sendPost(homepageURL);
+                        //sendPhoto();
                         startActivity(new Intent(this, HomeActivity.class));
                     }
                     catch (Exception e){
@@ -104,13 +106,13 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    /*protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == 100) {
             imageUri = data.getData();
             imgYemekResmi.setImageURI(imageUri);
         }
-    }
+    }*/
 
     public void sendPost(final String requestUrl) {
         Thread thread = new Thread(new Runnable() {
@@ -129,6 +131,36 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
                     jsonParam.put("aciklama", foodDescription);
                     jsonParam.put("tags", tagsArray);
                     jsonParam.put("username", username);
+                    Log.i("JSON", jsonParam.toString());
+                    OutputStream os = conn.getOutputStream();
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                    writer.write(jsonParam.toString());
+                    writer.flush();
+                    writer.close();
+                    os.close();
+                    Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                    Log.i("MSG", conn.getResponseMessage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+    }
+
+    public void sendPhoto() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://recipemanagementservice495.herokuapp.com/postPhoto.php");
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.connect();
+                    JSONObject jsonParam = new JSONObject();
+                    jsonParam.put("photo", foodImage);
                     Log.i("JSON", jsonParam.toString());
                     OutputStream os = conn.getOutputStream();
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));

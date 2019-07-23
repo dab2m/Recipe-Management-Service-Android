@@ -5,9 +5,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -30,6 +34,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     JSONParser jsonParser;
     ProgressDialog progressDialog;
     FoodHomeAdapter foodAdapter;
+    ArrayList<String> list;
 
     private static String homepageURL = "http://recipemanagementservice495.herokuapp.com/get.php?list";
 
@@ -39,6 +44,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     Button bBildirim;
     SearchView yemekArama; // TODO search ozelligi eklenecek
     ListView yemekListesi;
+    private ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +109,24 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             foodAdapter = new FoodHomeAdapter(HomeActivity.this, recipeArrayList);
             if (progressDialog.isShowing()) {
                 yemekListesi.setAdapter(foodAdapter);
+                /*adapter = new ArrayAdapter(HomeActivity.this, R.layout.item_recipe_without_delete, list);
+                yemekListesi2.setAdapter(adapter);
+                theFilter.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        (HomeActivity.this).adapter.getFilter().filter(s);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });*/
                 progressDialog.dismiss();
             }
         }
@@ -121,17 +145,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 try {
                     JSONObject jsonObject = new JSONObject(jsonString);
                     JSONArray recipes = jsonObject.getJSONArray("Recipes");
+                    list = new ArrayList<>();
                     for (int i = 0; i < recipes.length(); i++) {
                         JSONObject recipe = recipes.getJSONObject(i);
                         String recipeId = recipe.getString("recipeId");
                         String recipeName = recipe.getString("recipeName");
+                        list.add(recipeName);
                         String recipeImage = recipe.getString("recipeImage");
                         String recipeDescription = recipe.getString("recipeDescription");
+                        list.add(recipeDescription);
                         JSONArray foodTagsArray = recipe.getJSONArray("recipeTags");
                         String[] recipeTags = new String[foodTagsArray.length()];
-                        for (int j = 0; j < recipeTags.length; j++)
+                        for (int j = 0; j < recipeTags.length; j++) {
                             recipeTags[j] = foodTagsArray.getString(j);
-                            //recipeTags.append(recipeTagsArray.getString(j)).append(", ");
+                            list.add(recipeTags[j]);
+                        }
                         String created = recipe.getString("created");
                         String recipeDate = recipe.getString("recipeDate");
                         int likes = recipe.getInt("likes");

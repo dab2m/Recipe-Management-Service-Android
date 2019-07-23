@@ -3,6 +3,7 @@ package com.example.recipemanagementservice.adapter;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.recipemanagementservice.R;
+import com.example.recipemanagementservice.activity.MyRecipesActivity;
 import com.example.recipemanagementservice.model.FoodModel;
 
 import org.json.JSONObject;
@@ -57,36 +59,36 @@ public class FoodMyRecipesAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return recipeArrayList.get(i);
+    public Object getItem(int position) {
+        return recipeArrayList.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getView(final int i, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = layoutInflater.inflate(R.layout.item_recipe_with_delete, null);
         TextView recipeName = (TextView) view.findViewById(R.id.tvYemekIsmi);
         ImageView recipeImage = (ImageView) view.findViewById(R.id.ivYemekResmi);
-        new DownLoadImageTask(recipeImage).execute(recipeArrayList.get(i).getFoodImage());
+        new DownLoadImageTask(recipeImage).execute(recipeArrayList.get(position).getFoodImage());
         TextView recipeDecription = (TextView) view.findViewById(R.id.tvYemekAciklamasi);
         TextView recipeTags = (TextView) view.findViewById(R.id.tvYemekEtiketleri);
         bDelete = (Button) view.findViewById(R.id.bDelete);
         bDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recipeId = recipeArrayList.get(i).getFoodId();
+                recipeId = recipeArrayList.get(position).getFoodId();
                 SharedPreferences prefs = context.getSharedPreferences("MyApp", MODE_PRIVATE); // LoginActivity sayfasindan username'i almak icin kullanildi!
                 String username = prefs.getString("username", "UNKNOWN");
                 deletePost(recipeId, username);
             }
         });
-        recipeName.setText(recipeArrayList.get(i).getFoodName());
-        recipeDecription.setText(recipeArrayList.get(i).getFoodDescription());
-        recipeTags.setText(recipeArrayList.get(i).displayTags());
+        recipeName.setText(recipeArrayList.get(position).getFoodName());
+        recipeDecription.setText(recipeArrayList.get(position).getFoodDescription());
+        recipeTags.setText(recipeArrayList.get(position).displayTags());
         return view;
     }
 
