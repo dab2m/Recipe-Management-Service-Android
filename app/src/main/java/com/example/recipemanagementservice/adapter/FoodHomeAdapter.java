@@ -3,9 +3,11 @@ package com.example.recipemanagementservice.adapter;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +19,17 @@ import android.widget.TextView;
 import com.example.recipemanagementservice.R;
 import com.example.recipemanagementservice.model.FoodModel;
 
+import org.json.JSONObject;
+
+import java.io.BufferedWriter;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Berk on 16.06.2019.
@@ -30,6 +40,7 @@ public class FoodHomeAdapter extends BaseAdapter {
     ArrayList<FoodModel> recipeArrayList;
     LayoutInflater layoutInflater;
     Button bLike;
+    private String recipeId;
 
     public FoodHomeAdapter(Activity activity, ArrayList<FoodModel> recipeArrayList){
         this.context = activity;
@@ -53,17 +64,30 @@ public class FoodHomeAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view = layoutInflater.inflate(R.layout.item_recipe_without_delete, null);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        View view = layoutInflater.inflate(R.layout.item_recipe_with_like, null);
         TextView recipeName = (TextView) view.findViewById(R.id.yemekIsmi);
         ImageView recipeImage = (ImageView) view.findViewById(R.id.yemekResmi);
         new DownLoadImageTask(recipeImage).execute(recipeArrayList.get(position).getFoodImage());
         TextView recipeDecription = (TextView) view.findViewById(R.id.yemekAciklamasi);
         TextView recipeTags = (TextView) view.findViewById(R.id.yemekEtiketleri);
         bLike = (Button) view.findViewById(R.id.bBegen);
+        bLike.setClickable(true);
+        bLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bLike.setClickable(false);
+                recipeId = recipeArrayList.get(position).getFoodId();
+                SharedPreferences prefs = context.getSharedPreferences("MyApp", MODE_PRIVATE); // LoginActivity sayfasindan username'i almak icin kullanildi!
+                String username = prefs.getString("username", "UNKNOWN");
+                likePost(recipeId, username);
+
+            }
+        });
         recipeName.setText(recipeArrayList.get(position).getFoodName());
         recipeDecription.setText(recipeArrayList.get(position).getFoodDescription());
         recipeTags.setText(recipeArrayList.get(position).displayTags());
+        bLike.setText(recipeArrayList.get(position).getFoodLikes()+"");
         return view;
     }
 
@@ -94,5 +118,36 @@ public class FoodHomeAdapter extends BaseAdapter {
         protected void onPostExecute(Bitmap result){
             imageView.setImageBitmap(result);
         }
+    }
+
+    public void likePost(final String recipeId, final String username) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://recipemanagementservice495.herokuapp.com/post.php");
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.connect();
+                    JSONObject jsonParam = new JSONObject();
+                    jsonParam.put("like", recipeId);
+                    jsonParam.put("username", username);
+                    Log.i("JSON", jsonParam.toString());
+                    OutputStream os = conn.getOutputStream();
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                    writer.write(jsonParam.toString());
+                    writer.flush();
+                    writer.close();
+                    os.close();
+                    Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                    Log.i("MSG", conn.getResponseMessage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
     }
 }

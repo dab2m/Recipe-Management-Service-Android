@@ -3,7 +3,6 @@ package com.example.recipemanagementservice.adapter;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.recipemanagementservice.R;
-import com.example.recipemanagementservice.activity.MyRecipesActivity;
 import com.example.recipemanagementservice.model.FoodModel;
 
 import org.json.JSONObject;
