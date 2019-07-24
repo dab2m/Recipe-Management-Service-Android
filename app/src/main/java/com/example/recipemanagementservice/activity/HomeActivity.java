@@ -1,7 +1,9 @@
 package com.example.recipemanagementservice.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -19,8 +21,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.recipemanagementservice.R;
 import com.example.recipemanagementservice.adapter.FoodHomeAdapter;
+import com.example.recipemanagementservice.firebase.MySingleton;
 import com.example.recipemanagementservice.model.FoodModel;
 import com.example.recipemanagementservice.network.JSONParser;
 
@@ -29,6 +37,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by mustafatozluoglu on 10.06.2019
@@ -44,6 +54,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     Button bYeniYemekTarifi;
     Button bTariflerim;
     Button bAyarlar;
+    String app_server_url = "http://";
     Button bBildirim;
     ListView yemekListesi;
     EditText editText;
@@ -61,6 +72,34 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         bYeniYemekTarifi = (Button) findViewById(R.id.bYeniYemekTarifi);
         bTariflerim = (Button) findViewById(R.id.bTariflerim);
         bAyarlar = (Button) findViewById(R.id.bAyarlar);
+        /*bAyarlar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.FCM_PREF), Context.MODE_PRIVATE);
+                final String token = sharedPreferences.getString(getString(R.string.FCM_TOKEN), "");
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, app_server_url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                })
+                {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("fcm_token", token);
+                        return params;
+                    }
+                };
+                MySingleton.getmInstance(HomeActivity.this).addToRequestQueue(stringRequest);
+            }
+        });*/
         bBildirim = (Button) findViewById(R.id.bBildirim);
         bYeniYemekTarifi.setOnClickListener(this);
         bTariflerim.setOnClickListener(this);

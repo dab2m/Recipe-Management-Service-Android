@@ -20,7 +20,7 @@ import com.google.firebase.messaging.RemoteMessage;
  * Created by Berk on 24.07.2019.
  */
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-
+    // This class for Notifications with Firebase Console
     private static final String TAG = "MyFirebaseMsgService";
 
     @Override

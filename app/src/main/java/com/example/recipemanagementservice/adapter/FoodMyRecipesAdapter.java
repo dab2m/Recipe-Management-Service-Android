@@ -132,7 +132,7 @@ public class FoodMyRecipesAdapter extends BaseAdapter {
                     conn.connect();
                     JSONObject jsonParam = new JSONObject();
                     jsonParam.put("delete", recipeId);
-                    jsonParam.put("password", username);
+                    jsonParam.put("username", username);
                     Log.i("JSON", jsonParam.toString());
                     OutputStream os = conn.getOutputStream();
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
