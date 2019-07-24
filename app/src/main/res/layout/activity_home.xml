@@ -20,7 +20,9 @@
             android:backgroundTint="@color/red"
             android:background="@drawable/rounded_button"
             android:text="Yeni Yemek Tarifi"
-            android:textColor="@color/cardview_light_background" />
+            android:textSize="15sp"
+            android:textColor="@color/cardview_light_background"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/bTariflerim"
@@ -30,7 +32,9 @@
             android:backgroundTint="@color/red"
             android:background="@drawable/rounded_button"
             android:text="Tariflerim"
-            android:textColor="@color/cardview_light_background" />
+            android:textSize="15sp"
+            android:textColor="@color/cardview_light_background"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/bBildirim"
@@ -54,16 +58,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:layout_margin="8dp"
+        android:layout_margin="12dp"
+        android:paddingLeft="8dp"
         android:textColor="@color/amber"
         android:textColorHint="@color/amber"
-        android:hint="Search..."/>
+        android:background="@color/blue"
+        android:textSize="24sp"
+        android:hint="Search..."
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/butunYemekTarifleri"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:text="Yemek Tarifleri"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"

@@ -45,7 +45,9 @@
             android:background="@drawable/rounded_button"
             android:backgroundTint="@color/amber"
             android:text="Resim Ekle"
-            android:textColor="@color/cardview_light_background" />
+            android:textSize="16sp"
+            android:textColor="@color/cardview_light_background"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etyemekAciklamasi"
@@ -77,7 +79,9 @@
                 android:layout_weight="50"
                 android:background="@drawable/rounded_button"
                 android:text="Kaydet"
-                android:textColor="@color/cardview_light_background" />
+                android:textSize="16sp"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnIptalEt"
@@ -87,7 +91,9 @@
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/red"
                 android:text="Iptal Et"
-                android:textColor="@color/cardview_light_background" />
+                android:textSize="16sp"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

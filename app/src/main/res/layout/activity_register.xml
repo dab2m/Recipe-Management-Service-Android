@@ -11,8 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="40sp"
         android:text="Sign Up"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textSize="36sp"
         android:textColor="@color/colorWhite"
         android:textStyle="bold" />
 
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Username"
+        android:textSize="20sp"
         android:textColor="@color/cardview_light_background"
         android:textStyle="bold" />
 
@@ -35,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password"
+        android:textSize="20sp"
         android:textColor="@color/cardview_light_background"
         android:textStyle="bold" />
 
@@ -52,5 +55,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
         android:text="Register"
-        android:textColor="@color/cardview_light_background" />
+        android:textSize="16sp"
+        android:textColor="@color/cardview_light_background"
+        android:textStyle="bold" />
 </LinearLayout>
