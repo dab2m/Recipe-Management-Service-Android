@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.recipemanagementservice.R;
 import com.example.recipemanagementservice.network.ApiAuthenticationClient;
+import com.example.recipemanagementservice.firebase.MyFirebaseInstanceIdService;
+import com.example.recipemanagementservice.firebase.MyFirebaseMessagingService;
 
 /**
  * Created by mustafatozluoglu on 5.06.2019
@@ -35,6 +37,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         bRegister = (Button) findViewById(R.id.bRegister);
         bLogin.setOnClickListener(this);
         bRegister.setOnClickListener(this);
+        MyFirebaseMessagingService m = new MyFirebaseMessagingService();
+        final MyFirebaseInstanceIdService m2 = new MyFirebaseInstanceIdService();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                m2.onTokenRefresh();
+            }
+        });
+        thread.start();
     }
 
     @Override
