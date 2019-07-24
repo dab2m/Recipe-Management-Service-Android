@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="175dp"
         android:text="Tarifleriniz Kaç Gün Sonra Silinsin?"
-        android:textColor="@color/cardview_light_background"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/amber"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -24,12 +25,11 @@
 
     <Button
         android:id="@+id/btOnayla"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_button"
-        android:backgroundTint="@color/amber"
         android:text="Onayla"
+        android:textSize="16sp"
         android:textColor="@color/cardview_light_background" />
 </LinearLayout>

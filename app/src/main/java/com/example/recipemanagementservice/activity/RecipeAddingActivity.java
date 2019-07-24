@@ -88,8 +88,8 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
                     etYemekAciklamasi.setText("");
                     etYemekEtiketleri.setText("");
                     try{
-                        sendPost(homepageURL);
-                        //sendPhoto();
+                        postRecipe(homepageURL);
+                        //postPhoto();
                         startActivity(new Intent(this, HomeActivity.class));
                     }
                     catch (Exception e){
@@ -106,15 +106,7 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    /*protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == 100) {
-            imageUri = data.getData();
-            imgYemekResmi.setImageURI(imageUri);
-        }
-    }*/
-
-    public void sendPost(final String requestUrl) {
+    public void postRecipe(final String requestUrl) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -148,7 +140,7 @@ public class RecipeAddingActivity extends AppCompatActivity implements View.OnCl
         thread.start();
     }
 
-    public void sendPhoto() {
+    public void postPhoto() {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

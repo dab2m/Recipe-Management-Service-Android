@@ -37,20 +37,20 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/bBildirim"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="6dp"
-            android:backgroundTint="@color/amber"
-            android:background="@drawable/ic_logout_gray_24dp" />
-
-        <Button
             android:id="@+id/bAyarlar"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="6dp"
             android:backgroundTint="@color/amber"
             android:background="@drawable/ic_settings" />
+
+        <Button
+            android:id="@+id/bBildirim"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="6dp"
+            android:backgroundTint="@color/amber"
+            android:background="@drawable/ic_logout_gray_24dp" />
     </LinearLayout>
 
     <EditText
