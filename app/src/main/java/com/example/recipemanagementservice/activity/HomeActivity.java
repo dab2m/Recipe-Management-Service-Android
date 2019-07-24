@@ -100,7 +100,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 MySingleton.getmInstance(HomeActivity.this).addToRequestQueue(stringRequest);
             }
         });*/
-        bBildirim = (Button) findViewById(R.id.bBildirim);
+        bBildirim = (Button) findViewById(R.id.bCikis);
         bYeniYemekTarifi.setOnClickListener(this);
         bTariflerim.setOnClickListener(this);
         bAyarlar.setOnClickListener(this);
@@ -120,7 +120,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bAyarlar:
                 startActivity(new Intent(this, MySettingsActivity.class));
                 break;
-            case R.id.bBildirim:
+            case R.id.bCikis:
                 System.exit(0);
                 break;
         }
@@ -129,6 +129,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private class getRecipe extends AsyncTask<Void, Void, Void> {
 
         ArrayList<FoodModel> recipeArrayList = new ArrayList<>();
+        ArrayList<FoodModel> recipeArrayList2 = new ArrayList<>();
 
         @Override
         protected void onPreExecute() {
@@ -145,14 +146,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             foodAdapter = new FoodHomeAdapter(HomeActivity.this, recipeArrayList);
             if (progressDialog.isShowing()) {
                 yemekListesi.setAdapter(foodAdapter);
+                /*String s = yemekListesi.getItemAtPosition(1).toString();
+                recipeArrayList2 = convert(s);*/
                 editText.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
                     }
-
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        yemekListesi.setAdapter(new FoodHomeAdapter(HomeActivity.this, recipeArrayList2));
                         aList.clear();
                         for (int i = 0; i < list.length; i++)
                             if (list[i].toLowerCase().contains(s.toString().toLowerCase()))
@@ -245,4 +248,32 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             return null;
         }
     }
+
+    /*public ArrayList<FoodModel> convert(String s){
+        String foodId;
+        String foodName;
+        String foodImage;
+        String foodDescription;
+        String[] foodTags;
+        String foodCreated;
+        String foodDate;
+        int foodLikes;
+        foodId = s.substring(s.indexOf("=")+2,s.indexOf(",")-1);
+        s = s.substring(s.indexOf(",")+1);
+        foodName = s.substring(s.indexOf("=")+2,s.indexOf(",")-1);
+        s = s.substring(s.indexOf(",")+1);
+        foodImage = s.substring(s.indexOf("=")+2,s.indexOf(",")-1);
+        s = s.substring(s.indexOf(",")+1);
+        foodDescription = s.substring(s.indexOf("=")+2,s.indexOf(",")-1);
+        s = s.substring(s.indexOf(",")+1);
+        foodTags = new String[]{"pilav"};
+        s = s.substring(s.indexOf("'")+1);
+        foodCreated = "berk";
+        s = s.substring(s.indexOf(",")+1);
+        foodDate = "2019-07-24";
+        FoodModel fm = new FoodModel(foodId, foodName, foodImage, foodDescription, foodTags, foodCreated, foodDate, 0);
+        ArrayList<FoodModel> recipeArrayList3 = new ArrayList<>();
+        recipeArrayList3.add(fm);
+        return recipeArrayList3;
+    }*/
 }

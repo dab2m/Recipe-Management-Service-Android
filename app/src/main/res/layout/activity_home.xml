@@ -45,7 +45,7 @@
             android:background="@drawable/ic_settings" />
 
         <Button
-            android:id="@+id/bBildirim"
+            android:id="@+id/bCikis"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="6dp"
