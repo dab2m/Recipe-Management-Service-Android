@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="Tariflerim"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/amber"
-        android:textSize="30sp"
+        android:textSize="36sp"
         android:textStyle="bold" />
 
     <ListView

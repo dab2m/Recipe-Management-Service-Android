@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Yeni Tarif Ekle"
-            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/amber"
             android:textSize="36sp"
             android:textStyle="bold" />
 

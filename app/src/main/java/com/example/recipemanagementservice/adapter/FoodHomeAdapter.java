@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -71,6 +70,7 @@ public class FoodHomeAdapter extends BaseAdapter {
         TextView recipeName = (TextView) view.findViewById(R.id.yemekIsmi);
         ImageView recipeImage = (ImageView) view.findViewById(R.id.yemekResmi);
         new DownLoadImageTask(recipeImage).execute(recipeArrayList.get(position).getFoodImage());
+        TextView recipeCreated = (TextView) view.findViewById(R.id.yemekEkleyen);
         TextView recipeDecription = (TextView) view.findViewById(R.id.yemekAciklamasi);
         TextView recipeTags = (TextView) view.findViewById(R.id.yemekEtiketleri);
         bLike = (Button) view.findViewById(R.id.bBegen);
@@ -95,6 +95,7 @@ public class FoodHomeAdapter extends BaseAdapter {
             }
         });
         recipeName.setText(recipeArrayList.get(position).getFoodName());
+        recipeCreated.setText(recipeArrayList.get(position).getFoodCreated() + " bu tarifi ekledi");
         recipeDecription.setText(recipeArrayList.get(position).getFoodDescription());
         recipeTags.setText(recipeArrayList.get(position).displayTags());
         bLike.setText(recipeArrayList.get(position).getFoodLikes()+"");
